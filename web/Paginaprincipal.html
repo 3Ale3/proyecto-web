@@ -1,0 +1,1942 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AutoFlow | Automatizaciones, bots y desarrollo web</title>
+  <meta
+    name="description"
+    content="Creamos automatizaciones, bots para WhatsApp y Telegram, integraciones con APIs, desarrollo web y soluciones de hosting para empresas que quieren escalar sin perder tiempo."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Manrope:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg: #040b14;
+      --bg-soft: #091525;
+      --surface: rgba(10, 21, 38, 0.78);
+      --surface-strong: #0d1d34;
+      --card: rgba(11, 24, 43, 0.88);
+      --line: rgba(87, 160, 255, 0.18);
+      --line-strong: rgba(87, 160, 255, 0.4);
+      --text: #f3f8ff;
+      --muted: #8ea4bf;
+      --accent: #5ff0d2;
+      --accent-strong: #b8fff1;
+      --accent-alt: #5c8dff;
+      --danger: #ff8f8f;
+      --shadow: 0 30px 90px rgba(0, 0, 0, 0.42);
+      --radius: 24px;
+      --radius-sm: 16px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Manrope", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(92, 141, 255, 0.2), transparent 28%),
+        radial-gradient(circle at 85% 18%, rgba(95, 240, 210, 0.14), transparent 24%),
+        radial-gradient(circle at 50% 120%, rgba(92, 141, 255, 0.12), transparent 34%),
+        linear-gradient(180deg, #030811 0%, #06101d 42%, #040b14 100%);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(180deg, rgba(255,255,255,0.24), transparent 86%);
+      z-index: 0;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, transparent 0%, rgba(95, 240, 210, 0.035) 50%, transparent 100%);
+      opacity: 0.45;
+      mix-blend-mode: screen;
+      z-index: 0;
+    }
+
+    a { color: inherit; }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--accent-strong);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+      box-shadow: 0 0 18px rgba(112, 225, 200, 0.55);
+    }
+
+    h1, h2, h3, .brand {
+      font-family: "Space Grotesk", sans-serif;
+      line-height: 1.05;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 6.8vw, 5.4rem);
+      letter-spacing: -0.05em;
+      max-width: 8.2ch;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      letter-spacing: -0.04em;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    section { padding: 110px 0; }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 54px;
+    }
+
+    .section-head h2 { margin: 18px 0 16px; }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 24px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      color: #06111d;
+      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+      box-shadow: 0 18px 40px rgba(112, 225, 200, 0.2);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.03);
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--line-strong);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(4, 11, 20, 0.76);
+      border-bottom: 1px solid rgba(95, 240, 210, 0.08);
+    }
+
+    .nav-inner {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      text-decoration: none;
+      flex: 0 0 auto;
+    }
+
+    .brand span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 26px;
+      align-items: center;
+      margin-left: auto;
+      padding-left: 32px;
+      padding-right: 10px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.96rem;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      padding: 12px 18px;
+      font-size: 0.95rem;
+      flex: 0 0 auto;
+    }
+
+    .hero {
+      padding: 64px 0 96px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+      gap: 36px;
+      align-items: center;
+    }
+
+    .hero-copy p {
+      max-width: 660px;
+      margin: 22px 0 30px;
+      font-size: 1.1rem;
+    }
+
+    .hero-copy {
+      max-width: 700px;
+      min-width: 0;
+    }
+
+    .hero-kicker {
+      display: grid;
+      gap: 12px;
+      margin-top: 26px;
+      max-width: 660px;
+    }
+
+    .hero-kicker-line {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .hero-kicker-line strong {
+      color: var(--accent-strong);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      min-width: 88px;
+    }
+
+    .hero-kicker-line span {
+      color: #dbe9f8;
+      font-size: 0.95rem;
+    }
+
+    .hero-note {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 18px;
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .hero-note span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-card {
+      position: relative;
+      padding: 26px;
+      border-radius: 30px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+        rgba(8, 18, 32, 0.9);
+      border: 1px solid rgba(92, 141, 255, 0.16);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -90px -90px auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(95, 240, 210, 0.24), transparent 70%);
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(95, 240, 210, 0.04), transparent 36%),
+        linear-gradient(300deg, rgba(92, 141, 255, 0.06), transparent 32%);
+      pointer-events: none;
+    }
+
+    .stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .terminal {
+      background: rgba(2, 9, 18, 0.88);
+      border: 1px solid rgba(95, 240, 210, 0.1);
+      border-radius: 20px;
+      padding: 18px;
+    }
+
+    .terminal-top {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .terminal-top span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.18);
+    }
+
+    .terminal-top span:nth-child(1) { background: #ff6d7a; }
+    .terminal-top span:nth-child(2) { background: #ffd66b; }
+    .terminal-top span:nth-child(3) { background: #63f5ce; }
+
+    .code-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      color: #d7e6f8;
+      font-size: 0.95rem;
+    }
+
+    .code-line:last-child { border-bottom: 0; }
+
+    .code-line strong { color: var(--accent-strong); font-weight: 700; }
+
+    .system-flow {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .flow-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .flow-head strong {
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+    }
+
+    .flow-status {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(95, 240, 210, 0.1);
+      color: var(--accent-strong);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .flow-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .flow-node {
+      padding: 14px 12px;
+      border-radius: 16px;
+      background: rgba(7, 17, 31, 0.9);
+      border: 1px solid rgba(92, 141, 255, 0.14);
+      text-align: center;
+    }
+
+    .flow-node span {
+      display: block;
+      color: var(--accent-strong);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .flow-node strong {
+      display: block;
+      font-size: 0.92rem;
+      line-height: 1.35;
+    }
+
+    .hero-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .mini-card {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .mini-card strong {
+      display: block;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.6rem;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .mini-card span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .clients-strip {
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 34px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(92, 141, 255, 0.12);
+      color: #d7e6f8;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .services-grid,
+    .value-grid,
+    .process-grid,
+    .contact-grid {
+      display: grid;
+      gap: 22px;
+    }
+
+    .services-grid {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+
+    .service-card {
+      grid-column: span 4;
+      padding: 28px;
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), transparent 100%),
+        var(--card);
+      border: 1px solid var(--line);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--line-strong);
+    }
+
+    .service-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      margin-bottom: 18px;
+      font-size: 1.4rem;
+      background: linear-gradient(135deg, rgba(95,240,210,0.12), rgba(92,141,255,0.16));
+      border: 1px solid rgba(92,141,255,0.18);
+    }
+
+    .service-card h3 { margin-bottom: 10px; }
+
+    .service-card ul {
+      list-style: none;
+      margin-top: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .service-card li {
+      color: var(--muted);
+      font-size: 0.94rem;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .service-card li::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 0;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+    }
+
+    .section-band {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)),
+        radial-gradient(circle at 80% 20%, rgba(92,141,255,0.08), transparent 20%);
+      border-top: 1px solid rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .value-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .value-card,
+    .process-card,
+    .contact-card,
+    .cta-panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      backdrop-filter: blur(14px);
+    }
+
+    .value-card {
+      padding: 28px;
+    }
+
+    .value-card strong {
+      display: block;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .process-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .process-card {
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .process-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -50px -50px auto;
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, rgba(92,141,255,0.12), transparent 70%);
+      pointer-events: none;
+    }
+
+    .process-step {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      margin-bottom: 18px;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      color: #06111d;
+      background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+    }
+
+    .process-card p + p {
+      margin-top: 12px;
+      font-size: 0.95rem;
+    }
+
+    .showcase {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .showcase-main,
+    .showcase-side {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 30px;
+    }
+
+    .showcase-main h3,
+    .showcase-side h3 {
+      margin-bottom: 14px;
+    }
+
+    .showcase-list {
+      display: grid;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .showcase-item {
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(92,141,255,0.12);
+    }
+
+    .showcase-item strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .form-section-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .form-info,
+    .lead-form-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 30px;
+      backdrop-filter: blur(14px);
+    }
+
+    .form-info p {
+      margin-top: 14px;
+      max-width: 540px;
+    }
+
+    .form-points {
+      display: grid;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .form-point {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(92,141,255,0.12);
+    }
+
+    .form-point strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .form-code-note {
+      margin-top: 24px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(95,240,210,0.08);
+      border: 1px solid rgba(95,240,210,0.16);
+    }
+
+    .form-code-note code {
+      color: var(--accent-strong);
+      font-weight: 700;
+    }
+
+    .lead-form {
+      display: grid;
+      gap: 16px;
+    }
+
+    .lead-form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .lead-form-field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .lead-form-field.full {
+      grid-column: 1 / -1;
+    }
+
+    .lead-form label {
+      color: #d7e6f8;
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .lead-form input,
+    .lead-form select,
+    .lead-form textarea {
+      width: 100%;
+      border: 1px solid rgba(92,141,255,0.18);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 14px 16px;
+      font: inherit;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .lead-form input:focus,
+    .lead-form select:focus,
+    .lead-form textarea:focus {
+      border-color: rgba(95,240,210,0.42);
+      box-shadow: 0 0 0 3px rgba(95,240,210,0.08);
+    }
+
+    .lead-form input::placeholder,
+    .lead-form textarea::placeholder {
+      color: #7d93ac;
+    }
+
+    .lead-form textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .lead-form-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .lead-form-submit {
+      border: 0;
+      cursor: pointer;
+    }
+
+    .lead-form-status {
+      color: var(--muted);
+      font-size: 0.92rem;
+      min-height: 24px;
+    }
+
+    .lead-form-status.success {
+      color: var(--accent-strong);
+    }
+
+    .lead-form-status.error {
+      color: #ffb5b5;
+    }
+
+    .stack-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .stack-tags span {
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(112,225,200,0.08);
+      color: var(--accent-strong);
+      border: 1px solid rgba(112,225,200,0.15);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .cta-panel {
+      padding: 34px;
+      text-align: center;
+      background:
+        radial-gradient(circle at top center, rgba(95,240,210,0.16), transparent 35%),
+        linear-gradient(180deg, rgba(92,141,255,0.08), transparent 50%),
+        rgba(13, 27, 47, 0.8);
+    }
+
+    .cta-panel h2 {
+      max-width: 760px;
+      margin: 18px auto 16px;
+    }
+
+    .cta-panel p {
+      max-width: 640px;
+      margin: 0 auto 28px;
+    }
+
+    .contact-grid {
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      align-items: stretch;
+    }
+
+    .contact-card {
+      padding: 30px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .contact-link {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      text-decoration: none;
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(92,141,255,0.12);
+    }
+
+    .contact-link:hover { border-color: var(--line-strong); }
+
+    .contact-badge {
+      min-width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(95,240,210,0.14), rgba(92,141,255,0.16));
+      color: var(--accent-strong);
+      font-weight: 800;
+    }
+
+    .contact-link strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .contact-box {
+      padding: 24px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border: 1px solid rgba(92,141,255,0.12);
+    }
+
+    .contact-box h3 {
+      margin-bottom: 14px;
+    }
+
+    .contact-box p::before {
+      content: "> ";
+      color: var(--accent-strong);
+      font-weight: 800;
+    }
+
+    .contact-box p + p { margin-top: 10px; }
+
+    footer {
+      padding: 34px 0 54px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .chatbot {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 120;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 14px;
+    }
+
+    .chatbot-window {
+      width: min(380px, calc(100vw - 24px));
+      max-height: min(620px, calc(100vh - 120px));
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border-radius: 24px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
+        rgba(7, 16, 30, 0.96);
+      border: 1px solid rgba(92,141,255,0.22);
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.45);
+      transform-origin: bottom right;
+      opacity: 0;
+      transform: translateY(16px) scale(0.96);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      backdrop-filter: blur(18px);
+    }
+
+    .chatbot.open .chatbot-window {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .chatbot-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 18px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      background: linear-gradient(180deg, rgba(92,141,255,0.12), rgba(95,240,210,0.05));
+    }
+
+    .chatbot-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .chatbot-avatar {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+      color: #03101d;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      flex: 0 0 auto;
+    }
+
+    .chatbot-title strong {
+      display: block;
+      font-size: 0.98rem;
+      color: var(--text);
+    }
+
+    .chatbot-title span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.83rem;
+    }
+
+    .chatbot-close {
+      width: 38px;
+      height: 38px;
+      border: 0;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .chatbot-close:hover {
+      background: rgba(255,255,255,0.1);
+      transform: scale(1.04);
+    }
+
+    .chatbot-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      overflow-y: auto;
+      min-height: 280px;
+      max-height: 360px;
+      scroll-behavior: smooth;
+    }
+
+    .chatbot-message {
+      display: flex;
+    }
+
+    .chatbot-message.user {
+      justify-content: flex-end;
+    }
+
+    .chatbot-bubble {
+      max-width: 86%;
+      padding: 12px 14px;
+      border-radius: 18px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      white-space: pre-line;
+    }
+
+    .chatbot-message.bot .chatbot-bubble {
+      color: var(--text);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(92,141,255,0.16);
+      border-bottom-left-radius: 8px;
+    }
+
+    .chatbot-message.user .chatbot-bubble {
+      color: #03101d;
+      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+      border-bottom-right-radius: 8px;
+    }
+
+    .chatbot-typing {
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+      padding: 12px 14px;
+      border-radius: 18px;
+      border-bottom-left-radius: 8px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(92,141,255,0.16);
+    }
+
+    .chatbot-typing span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-strong);
+      opacity: 0.45;
+      animation: chatbotTyping 1s infinite ease-in-out;
+    }
+
+    .chatbot-typing span:nth-child(2) { animation-delay: 0.15s; }
+    .chatbot-typing span:nth-child(3) { animation-delay: 0.3s; }
+
+    @keyframes chatbotTyping {
+      0%, 80%, 100% { transform: translateY(0); opacity: 0.35; }
+      40% { transform: translateY(-3px); opacity: 1; }
+    }
+
+    .chatbot-form {
+      padding: 14px 16px 16px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      gap: 10px;
+      background: rgba(4, 11, 20, 0.7);
+    }
+
+    .chatbot-input {
+      flex: 1;
+      min-width: 0;
+      border: 1px solid rgba(92,141,255,0.18);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 14px 16px;
+      font: inherit;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .chatbot-input:focus {
+      border-color: rgba(95,240,210,0.42);
+      box-shadow: 0 0 0 3px rgba(95,240,210,0.08);
+    }
+
+    .chatbot-input::placeholder {
+      color: #7d93ac;
+    }
+
+    .chatbot-send {
+      border: 0;
+      min-width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      cursor: pointer;
+      color: #03101d;
+      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+      font-weight: 800;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 12px 24px rgba(95,240,210,0.18);
+    }
+
+    .chatbot-send:hover,
+    .chatbot-toggle:hover {
+      transform: translateY(-2px);
+    }
+
+    .chatbot-toggle {
+      width: 64px;
+      height: 64px;
+      border: 0;
+      border-radius: 20px;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      color: #03101d;
+      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+      box-shadow: 0 20px 40px rgba(95,240,210,0.22);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .chatbot-toggle svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1080px) {
+      .form-section-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .service-card { grid-column: auto; }
+      .value-grid,
+      .process-grid,
+      .showcase,
+      .contact-grid,
+      .hero-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      .lead-form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-info,
+      .lead-form-card {
+        padding: 22px;
+      }
+
+      section { padding: 84px 0; }
+      .container { width: min(var(--max), calc(100% - 28px)); }
+      .nav-links { display: none; }
+      .btn-row { flex-direction: column; }
+      .btn { width: 100%; }
+      .hero { padding-top: 40px; }
+      .hero-mini-grid,
+      .flow-grid,
+      .value-grid,
+      .process-grid,
+      .services-grid { grid-template-columns: 1fr; }
+      .service-card { grid-column: auto; }
+      .hero-card,
+      .showcase-main,
+      .showcase-side,
+      .contact-card,
+      .cta-panel { padding: 22px; }
+      .chatbot {
+        right: 14px;
+        bottom: 14px;
+        left: 14px;
+        align-items: stretch;
+      }
+      .chatbot-window {
+        width: 100%;
+        max-height: min(70vh, 560px);
+      }
+      .chatbot-toggle {
+        align-self: flex-end;
+      }
+      h1 {
+        font-size: clamp(2.6rem, 12vw, 4.2rem);
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .nav-links {
+        gap: 18px;
+        padding-left: 20px;
+        padding-right: 4px;
+      }
+
+      .nav-links a {
+        font-size: 0.9rem;
+      }
+
+      .nav-cta {
+        padding: 11px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav">
+    <div class="container nav-inner">
+      <a href="#inicio" class="brand">Auto<span>Flow</span></a>
+      <div class="nav-links">
+        <a href="#servicios">Servicios</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#soluciones">Soluciones</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+      <a
+        href="https://wa.me/34600000000?text=Hola,%20quiero%20informacion%20sobre%20automatizaciones%20y%20bots"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn-primary nav-cta"
+      >WhatsApp</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow">Automatizaciones para empresas</div>
+          <h1>Infraestructura digital para automatizar conversaciones, procesos y captación.</h1>
+          <p>
+            Construimos sistemas conectados para empresas que quieren operar con lógica de producto: bots para WhatsApp y Telegram, automatizaciones internas, integraciones con APIs, páginas web y despliegues listos para producción.
+          </p>
+          <div class="btn-row">
+            <a
+              href="https://wa.me/34600000000?text=Hola,%20quiero%20mejorar%20mi%20negocio%20con%20automatizaciones"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-primary"
+            >Pedir propuesta</a>
+            <a href="#servicios" class="btn btn-secondary">Ver servicios</a>
+          </div>
+          <div class="hero-kicker">
+            <div class="hero-kicker-line">
+              <strong>Input</strong>
+              <span>Mensajes, formularios, eventos y acciones de usuario entran en un sistema unificado.</span>
+            </div>
+            <div class="hero-kicker-line">
+              <strong>Logic</strong>
+              <span>Procesamos reglas, derivaciones, respuestas y sincronización entre herramientas.</span>
+            </div>
+            <div class="hero-kicker-line">
+              <strong>Output</strong>
+              <span>Más velocidad operativa, menos tareas repetitivas y una experiencia más profesional.</span>
+            </div>
+          </div>
+          <div class="hero-note">
+            <span>Arquitectura conectada</span>
+            <span>Automatización conversacional</span>
+            <span>Web, APIs y despliegue</span>
+          </div>
+          <div class="clients-strip">
+            <div class="chip">Bots operativos</div>
+            <div class="chip">Lead routing</div>
+            <div class="chip">Workflows internos</div>
+            <div class="chip">APIs conectadas</div>
+          </div>
+        </div>
+
+        <div class="hero-card reveal">
+          <div class="stack">
+            <div class="terminal">
+              <div class="terminal-top">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="code-line">
+                <span>Canal de entrada</span>
+                <strong>WhatsApp / Telegram / Web</strong>
+              </div>
+              <div class="code-line">
+                <span>Motor de lógica</span>
+                <strong>Responder, clasificar, derivar y registrar</strong>
+              </div>
+              <div class="code-line">
+                <span>Capa de integración</span>
+                <strong>CRM, Google Sheets, APIs, email y paneles</strong>
+              </div>
+              <div class="code-line">
+                <span>Estado final</span>
+                <strong>Operativa más limpia y menos fricción comercial</strong>
+              </div>
+            </div>
+            <div class="system-flow">
+              <div class="flow-head">
+                <strong>System topology</strong>
+                <div class="flow-status">Live workflow</div>
+              </div>
+              <div class="flow-grid">
+                <div class="flow-node">
+                  <span>Layer 1</span>
+                  <strong>Captación</strong>
+                </div>
+                <div class="flow-node">
+                  <span>Layer 2</span>
+                  <strong>Automatización</strong>
+                </div>
+                <div class="flow-node">
+                  <span>Layer 3</span>
+                  <strong>Integración</strong>
+                </div>
+              </div>
+            </div>
+            <div class="hero-mini-grid">
+              <div class="mini-card">
+                <strong>24/7</strong>
+                <span>bots activos cuando tu equipo no está disponible</span>
+              </div>
+              <div class="mini-card">
+                <strong>API</strong>
+                <span>conectamos herramientas para evitar trabajo duplicado</span>
+              </div>
+              <div class="mini-card">
+                <strong>UX</strong>
+                <span>interfaces claras, rápidas y enfocadas en conversión</span>
+              </div>
+              <div class="mini-card">
+                <strong>Deploy</strong>
+                <span>si hace falta, dejamos el sistema publicado y operativo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicios">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Servicios</div>
+          <h2>Lo que hacemos para automatizar y escalar tu negocio</h2>
+          <p>
+            El enfoque ahora es más tecnológico y más concreto: diseñamos soluciones conectadas, no piezas sueltas sin contexto.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card reveal">
+            <div class="service-icon">01</div>
+            <h3>Bots conversacionales</h3>
+            <p>
+              Creamos bots para WhatsApp y Telegram con lógica útil de negocio: respuesta automática, clasificación, captación y derivación.
+            </p>
+            <ul>
+              <li>Preguntas frecuentes y atención automática</li>
+              <li>Captación de clientes y formularios conversacionales</li>
+              <li>Seguimiento de leads y derivación al equipo</li>
+            </ul>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-icon">02</div>
+            <h3>Automatizaciones a medida</h3>
+            <p>
+              Convertimos tareas repetitivas en flujos automáticos para que la información se mueva sola y el equipo no pierda tiempo.
+            </p>
+            <ul>
+              <li>Automatización de avisos, emails y gestión interna</li>
+              <li>Sincronización entre formularios, hojas, CRM o bases de datos</li>
+              <li>Flujos adaptados al proceso real de tu empresa</li>
+            </ul>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-icon">03</div>
+            <h3>Integraciones con APIs</h3>
+            <p>
+              Si tus herramientas no se hablan entre sí, diseñamos una capa de integración para conectar datos, acciones y eventos.
+            </p>
+            <ul>
+              <li>Conexiones con plataformas externas y servicios de terceros</li>
+              <li>Envío y recepción de datos en tiempo real</li>
+              <li>Lógica personalizada según tu operativa</li>
+            </ul>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-icon">04</div>
+            <h3>Páginas web profesionales</h3>
+            <p>
+              Diseñamos webs con estética más sólida y mentalidad de producto: mejor estructura, mejor mensaje y mejor conversión.
+            </p>
+            <ul>
+              <li>Landing pages y webs corporativas</li>
+              <li>Enfoque visual más serio y orientado a venta</li>
+              <li>Preparación para formularios, bots y analítica</li>
+            </ul>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-icon">05</div>
+            <h3>Hosting y despliegue</h3>
+            <p>
+              Si hace falta, dejamos la solución desplegada, publicada y lista para operar sin que tengas que pelearte con la parte técnica.
+            </p>
+            <ul>
+              <li>Publicación de webs y sistemas</li>
+              <li>Configuración básica de dominios y entornos</li>
+              <li>Soporte para dejarlo operativo</li>
+            </ul>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-icon">06</div>
+            <h3>Soluciones conectadas</h3>
+            <p>
+              Pensamos en arquitectura completa: web, bot, automatización e integraciones trabajando como un único sistema.
+            </p>
+            <ul>
+              <li>Visión global del proceso completo</li>
+              <li>Menos herramientas aisladas y más orden</li>
+              <li>Escalable según vaya creciendo tu negocio</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-band" id="valor">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Valor</div>
+          <h2>Qué mejora cuando automatizas bien</h2>
+          <p>
+            La tecnología solo aporta si mejora la operativa. Por eso el foco está en velocidad, control y una experiencia más consistente.
+          </p>
+        </div>
+
+        <div class="value-grid">
+          <article class="value-card reveal">
+            <strong>Más velocidad</strong>
+            <p>Tu empresa responde antes, ejecuta procesos sin cuellos de botella y reduce fricción en cada interacción.</p>
+          </article>
+          <article class="value-card reveal">
+            <strong>Más orden</strong>
+            <p>Centralizamos lógica y datos para que cada herramienta cumpla un papel claro dentro del sistema.</p>
+          </article>
+          <article class="value-card reveal">
+            <strong>Más imagen profesional</strong>
+            <p>Web, automatizaciones y bots con una experiencia coherente que transmite estructura, control y seriedad.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="proceso">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Proceso</div>
+          <h2>Trabajamos con una lógica simple: entender, construir y dejar funcionando</h2>
+          <p>
+            También aquí lo llevé a un tono más tecnológico: menos promesa genérica y más claridad sobre cómo se diseña una solución real.
+          </p>
+        </div>
+
+        <div class="process-grid">
+          <article class="process-card reveal">
+            <div class="process-step">01</div>
+            <h3>Analizamos tu caso</h3>
+            <p>Revisamos tu operativa, tus herramientas y los puntos donde se está perdiendo tiempo, trazabilidad o conversión.</p>
+            <p>La idea es definir una solución con sentido, no automatizar por automatizar.</p>
+          </article>
+          <article class="process-card reveal">
+            <div class="process-step">02</div>
+            <h3>Diseñamos la solución</h3>
+            <p>Definimos la lógica del bot, la estructura de la web o la arquitectura de integración según tu caso real.</p>
+            <p>Sin capas innecesarias y con foco en escalabilidad y utilidad.</p>
+          </article>
+          <article class="process-card reveal">
+            <div class="process-step">03</div>
+            <h3>Implementamos y publicamos</h3>
+            <p>Construimos, probamos y dejamos la solución operativa para que empiece a aportar valor cuanto antes.</p>
+            <p>El foco está en estabilidad, claridad y uso real.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-band" id="soluciones">
+      <div class="container">
+        <div class="showcase">
+          <div class="showcase-main reveal">
+            <div class="eyebrow">Soluciones reales</div>
+            <h2 style="margin-top:18px;">Ejemplos del tipo de sistema que puedes tener</h2>
+            <div class="showcase-list">
+              <div class="showcase-item">
+                <strong>Bot de WhatsApp conectado con tu captación</strong>
+                <p>El usuario entra, el sistema responde, captura datos y dispara acciones dentro de tu flujo comercial.</p>
+              </div>
+              <div class="showcase-item">
+                <strong>Landing profesional con automatización detrás</strong>
+                <p>Una web clara y moderna donde formularios, eventos y contacto quedan conectados con la operativa.</p>
+              </div>
+              <div class="showcase-item">
+                <strong>Automatización interna para ahorrar horas</strong>
+                <p>Tareas que hoy dependen de copiar y pegar pueden pasar a ejecutarse entre herramientas de forma automática.</p>
+              </div>
+            </div>
+          </div>
+
+          <aside class="showcase-side reveal">
+            <h3>Tecnología con enfoque práctico</h3>
+            <p>
+              No vendemos tecnología como adorno. La aterrizamos en sistemas útiles, conectados y preparados para mejorar la operación diaria.
+            </p>
+            <div class="stack-tags">
+              <span>WhatsApp</span>
+              <span>Telegram</span>
+              <span>APIs</span>
+              <span>Automatización</span>
+              <span>Web</span>
+              <span>Hosting</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="formulario">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Formulario</div>
+          <h2>Cuéntanos tu proyecto y te preparamos una propuesta</h2>
+          <p>
+            Si necesitas un bot, una automatización, una integración o una web, déjanos los datos y te responderemos con una propuesta adaptada.
+          </p>
+        </div>
+
+        <div class="form-section-grid">
+          <div class="form-info reveal">
+            <h3>Un formulario hecho para AutoFlow</h3>
+            <p>
+              Está pensado para captar solicitudes reales de clientes que buscan automatizar procesos, montar bots, conectar APIs o desarrollar una web profesional.
+            </p>
+
+            <div class="form-points">
+              <div class="form-point">
+                <strong>Más útil que un formulario genérico</strong>
+                <p>El usuario puede indicar exactamente qué servicio necesita.</p>
+              </div>
+              <div class="form-point">
+                <strong>Preparado para convertir</strong>
+                <p>Recoge la información mínima pero importante para empezar una conversación comercial seria.</p>
+              </div>
+              <div class="form-point">
+                <strong>Listo para Formspree</strong>
+                <p>Solo tendrás que poner tu ID y ya podrá enviarte los leads directamente.</p>
+              </div>
+            </div>
+
+            <div class="form-code-note">
+              Solo cambia esta línea del script:
+              <br />
+              <code>const FORM_ID = "TU_ID_AQUI";</code>
+            </div>
+          </div>
+
+          <div class="lead-form-card reveal">
+            <form class="lead-form" id="leadForm">
+              <div class="lead-form-grid">
+                <div class="lead-form-field">
+                  <label for="leadName">Nombre</label>
+                  <input id="leadName" name="nombre" type="text" placeholder="Tu nombre" required />
+                </div>
+
+                <div class="lead-form-field">
+                  <label for="leadCompany">Empresa</label>
+                  <input id="leadCompany" name="empresa" type="text" placeholder="Nombre de tu empresa" />
+                </div>
+
+                <div class="lead-form-field">
+                  <label for="leadEmail">Email</label>
+                  <input id="leadEmail" name="email" type="email" placeholder="tuemail@empresa.com" required />
+                </div>
+
+                <div class="lead-form-field">
+                  <label for="leadPhone">Teléfono</label>
+                  <input id="leadPhone" name="telefono" type="tel" placeholder="+34 600 000 000" />
+                </div>
+
+                <div class="lead-form-field full">
+                  <label for="leadService">Qué necesitas</label>
+                  <select id="leadService" name="servicio" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="Bot para WhatsApp o Telegram">Bot para WhatsApp o Telegram</option>
+                    <option value="Automatización de procesos">Automatización de procesos</option>
+                    <option value="Integración con APIs">Integración con APIs</option>
+                    <option value="Desarrollo web">Desarrollo web</option>
+                    <option value="Hosting y despliegue">Hosting y despliegue</option>
+                    <option value="Solución completa">Solución completa</option>
+                  </select>
+                </div>
+
+                <div class="lead-form-field full">
+                  <label for="leadMessage">Cuéntanos tu proyecto</label>
+                  <textarea
+                    id="leadMessage"
+                    name="mensaje"
+                    placeholder="Explícanos qué quieres automatizar, qué tipo de bot necesitas o qué web quieres montar..."
+                    required
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="lead-form-actions">
+                <button class="btn btn-primary lead-form-submit" type="submit">Enviar solicitud</button>
+                <div class="lead-form-status" id="leadFormStatus">Completa el formulario y envíanos tu idea.</div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="container">
+        <div class="cta-panel reveal" style="margin-bottom: 24px;">
+          <div class="eyebrow">Contacto</div>
+          <h2>Si quieres una presencia más sólida y una operativa más inteligente, lo diseñamos contigo.</h2>
+          <p>
+            Cuéntanos qué parte quieres mejorar y te diremos qué arquitectura o solución tiene sentido montar, sin humo y sin capas innecesarias.
+          </p>
+          <div class="btn-row" style="justify-content:center;">
+            <a
+              href="https://wa.me/34600000000?text=Hola,%20quiero%20informacion%20sobre%20vuestros%20servicios"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-primary"
+            >Hablar por WhatsApp</a>
+            <a href="mailto:hola@autoflow.es" class="btn btn-secondary">Enviar email</a>
+          </div>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-card reveal">
+            <h3>Canales de contacto</h3>
+            <p style="margin-top: 12px;">
+              El siguiente paso está pensado para ser directo, claro y profesional.
+            </p>
+            <div class="contact-list">
+              <a
+                class="contact-link"
+                href="https://wa.me/34600000000?text=Hola,%20me%20gustaria%20recibir%20una%20propuesta"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div class="contact-badge">WA</div>
+                <div>
+                  <strong>WhatsApp</strong>
+                  <p>+34 600 000 000</p>
+                </div>
+              </a>
+              <a class="contact-link" href="mailto:hola@autoflow.es">
+                <div class="contact-badge">@</div>
+                <div>
+                  <strong>Email</strong>
+                  <p>hola@autoflow.es</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-card reveal">
+            <div class="contact-box">
+              <h3>Qué puedes pedirnos</h3>
+              <p>Un bot para WhatsApp o Telegram con lógica de negocio.</p>
+              <p>Una automatización conectada con APIs y herramientas internas.</p>
+              <p>Una web más tecnológica, clara y profesional.</p>
+              <p>El despliegue y hosting de la solución si lo necesitas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <div class="brand">Auto<span>Flow</span></div>
+        <p>Automatizaciones, bots, desarrollo web e integraciones para empresas.</p>
+      </div>
+      <div>
+        <p>hola@autoflow.es</p>
+        <p>© 2026 AutoFlow. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="chatbot" id="chatbot">
+    <div class="chatbot-window" aria-hidden="true">
+      <div class="chatbot-header">
+        <div class="chatbot-title">
+          <div class="chatbot-avatar">AF</div>
+          <div>
+            <strong>Asistente AutoFlow</strong>
+            <span>Respuestas rápidas sobre servicios, precios y contacto</span>
+          </div>
+        </div>
+        <button class="chatbot-close" id="chatbotClose" type="button" aria-label="Cerrar chat">✕</button>
+      </div>
+      <div class="chatbot-body" id="chatbotMessages">
+        <div class="chatbot-message bot">
+          <div class="chatbot-bubble">¡Hola! 👋 Soy el asistente de AutoFlow.
+
+Puedes preguntarme por:
+- servicios
+- precios
+- WhatsApp o contacto
+- email
+- automatización
+- bots o chatbot</div>
+        </div>
+      </div>
+      <form class="chatbot-form" id="chatbotForm">
+        <input
+          class="chatbot-input"
+          id="chatbotInput"
+          type="text"
+          placeholder="Escribe tu mensaje..."
+          autocomplete="off"
+        />
+        <button class="chatbot-send" type="submit" aria-label="Enviar mensaje">➜</button>
+      </form>
+    </div>
+
+    <button class="chatbot-toggle" id="chatbotToggle" type="button" aria-label="Abrir chat">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 3C6.477 3 2 6.925 2 11.765c0 2.59 1.282 4.917 3.324 6.528L4.5 22l4.208-2.25c1.019.277 2.115.426 3.292.426 5.523 0 10-3.925 10-8.765S17.523 3 12 3zm-4.25 7.75a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm4.25 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm4.25 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/>
+      </svg>
+    </button>
+  </div>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add("visible");
+          }, index * 70);
+        }
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+
+    const chatbot = document.getElementById("chatbot");
+    const chatbotWindow = chatbot.querySelector(".chatbot-window");
+    const chatbotToggle = document.getElementById("chatbotToggle");
+    const chatbotClose = document.getElementById("chatbotClose");
+    const chatbotForm = document.getElementById("chatbotForm");
+    const chatbotInput = document.getElementById("chatbotInput");
+    const chatbotMessages = document.getElementById("chatbotMessages");
+
+    function setChatbotOpen(isOpen) {
+      chatbot.classList.toggle("open", isOpen);
+      chatbotWindow.setAttribute("aria-hidden", String(!isOpen));
+      if (isOpen) {
+        setTimeout(() => chatbotInput.focus(), 180);
+        scrollChatToBottom();
+      }
+    }
+
+    function scrollChatToBottom() {
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+
+    function addMessage(role, text) {
+      const wrapper = document.createElement("div");
+      wrapper.className = `chatbot-message ${role}`;
+
+      const bubble = document.createElement("div");
+      bubble.className = "chatbot-bubble";
+      bubble.textContent = text;
+
+      wrapper.appendChild(bubble);
+      chatbotMessages.appendChild(wrapper);
+      scrollChatToBottom();
+    }
+
+    function addTypingIndicator() {
+      const wrapper = document.createElement("div");
+      wrapper.className = "chatbot-message bot";
+      wrapper.id = "chatbotTyping";
+      wrapper.innerHTML = '<div class="chatbot-typing"><span></span><span></span><span></span></div>';
+      chatbotMessages.appendChild(wrapper);
+      scrollChatToBottom();
+    }
+
+    function removeTypingIndicator() {
+      const typing = document.getElementById("chatbotTyping");
+      if (typing) typing.remove();
+    }
+
+    function getBotReply(message) {
+      const text = message.toLowerCase().trim();
+
+      const rules = [
+        {
+          keywords: ["hola", "buenas", "hey"],
+          reply: "¡Hola! 👋 Soy el asistente de AutoFlow. ¿En qué puedo ayudarte? Puedes preguntarme por precios, servicios o contacto."
+        },
+        {
+          keywords: ["servicios", "qué hacéis", "que hacéis", "qué ofrecen", "que ofrecen"],
+          reply: "En AutoFlow creamos bots para WhatsApp y Telegram, automatizaciones, integraciones con APIs, desarrollo web y gestión de hosting. ¿Qué te interesa mejorar?"
+        },
+        {
+          keywords: ["precio", "cuánto cuesta", "cuanto cuesta", "tarifas"],
+          reply: "Los precios dependen de lo que necesites. Cada solución es personalizada. Lo mejor es que nos escribas y te damos una propuesta adaptada."
+        },
+        {
+          keywords: ["whatsapp", "contactar", "hablar", "número", "numero"],
+          reply: "Puedes escribirnos directamente por WhatsApp aquí 👉 https://wa.me/34600000000 o a nuestro email example@gmail.com"
+        },
+        {
+          keywords: ["email", "correo"],
+          reply: "También puedes escribirnos por email: hola@autoflow.es"
+        },
+        {
+          keywords: ["automatizar", "automatización", "automatizacion"],
+          reply: "Podemos automatizar tareas, mensajes y procesos para que tu negocio funcione solo. Cuéntanos tu caso por WhatsApp y lo vemos contigo."
+        },
+        {
+          keywords: ["bot", "chatbot"],
+          reply: "Creamos bots para WhatsApp, Telegram y tu web que responden clientes, captan leads y automatizan tu negocio."
+        }
+      ];
+
+      const match = rules.find((rule) => rule.keywords.some((keyword) => text.includes(keyword)));
+
+      return match
+        ? match.reply
+        : "Ponte en contacto con nosotros mediante nuestro correo example@gmail.com o whatsapp ";
+    }
+
+    chatbotToggle.addEventListener("click", () => {
+      const nextState = !chatbot.classList.contains("open");
+      setChatbotOpen(nextState);
+    });
+
+    chatbotClose.addEventListener("click", () => {
+      setChatbotOpen(false);
+    });
+
+    chatbotForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const message = chatbotInput.value.trim();
+      if (!message) return;
+
+      addMessage("user", message);
+      chatbotInput.value = "";
+      addTypingIndicator();
+
+      window.setTimeout(() => {
+        removeTypingIndicator();
+        addMessage("bot", getBotReply(message));
+      }, 500);
+    });
+
+    const leadForm = document.getElementById("leadForm");
+    const leadFormStatus = document.getElementById("leadFormStatus");
+    const FORM_ID = "TU_ID_AQUI";
+
+    leadForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (FORM_ID === "TU_ID_AQUI") {
+        leadFormStatus.textContent = 'Solo te falta cambiar `const FORM_ID = "TU_ID_AQUI";` por tu ID real de Formspree.';
+        leadFormStatus.className = "lead-form-status error";
+        return;
+      }
+
+      const formData = new FormData(leadForm);
+
+      leadFormStatus.textContent = "Enviando solicitud...";
+      leadFormStatus.className = "lead-form-status";
+
+      try {
+        const response = await fetch(`https://formspree.io/f/${FORM_ID}`, {
+          method: "POST",
+          headers: {
+            Accept: "application/json"
+          },
+          body: formData
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result?.error || "No se pudo enviar el formulario");
+        }
+
+        leadForm.reset();
+        leadFormStatus.textContent = "Solicitud enviada correctamente. Te responderemos lo antes posible.";
+        leadFormStatus.className = "lead-form-status success";
+      } catch (error) {
+        leadFormStatus.textContent = "Hubo un problema al enviar el formulario. Revisa tu ID de Formspree o inténtalo de nuevo.";
+        leadFormStatus.className = "lead-form-status error";
+      }
+    });
+  </script>
+</body>
+</html>
