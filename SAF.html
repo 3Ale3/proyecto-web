@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AutoFlow | Solicitud</title>
+  <meta name="description" content="Envía tu solicitud a AutoFlow. Automatizaciones, bots, integraciones con APIs, desarrollo web y hosting para tu empresa." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Design tokens (sincronizados con Paginaprincipal.html) ─── */
+    :root {
+      --bg:             #040b14;
+      --bg-soft:        #091525;
+      --surface:        rgba(10, 21, 38, 0.78);
+      --surface-strong: #0d1d34;
+      --card:           rgba(11, 24, 43, 0.88);
+      --line:           rgba(87, 160, 255, 0.18);
+      --line-strong:    rgba(87, 160, 255, 0.4);
+      --text:           #f3f8ff;
+      --muted:          #8ea4bf;
+      --accent:         #5ff0d2;
+      --accent-strong:  #b8fff1;
+      --accent-alt:     #5c8dff;
+      --danger:         #ff8f8f;
+      --warning:        #ffd66b;
+      --shadow:         0 30px 90px rgba(0, 0, 0, 0.42);
+      --radius:         24px;
+      --radius-sm:      16px;
+      --max:            1180px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Manrope", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 10%,  rgba(92,141,255,0.20),  transparent 28%),
+        radial-gradient(circle at 85% 18%,  rgba(95,240,210,0.14),  transparent 24%),
+        radial-gradient(circle at 50% 120%, rgba(92,141,255,0.12),  transparent 34%),
+        linear-gradient(180deg, #030811 0%, #06101d 42%, #040b14 100%);
+      line-height: 1.65;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Cuadrícula de fondo */
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(180deg, rgba(255,255,255,.24), transparent 86%);
+      z-index: 0;
+    }
+
+    /* Velo de luz */
+    body::after {
+      content: "";
+      position: fixed; inset: 0;
+      pointer-events: none;
+      background: linear-gradient(90deg, transparent 0%, rgba(95,240,210,.035) 50%, transparent 100%);
+      opacity: .45;
+      mix-blend-mode: screen;
+      z-index: 0;
+    }
+
+    a { color: inherit; }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Tipografía ── */
+    h1, h2, h3, .brand { font-family: "Space Grotesk", sans-serif; line-height: 1.05; }
+    h2 { font-size: clamp(2rem, 5vw, 3.4rem); letter-spacing: -.04em; }
+    h3 { font-size: 1.15rem; letter-spacing: -.02em; }
+    p  { color: var(--muted); font-size: 1.02rem; }
+
+    /* ── Eyebrow ── */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      color: var(--accent-strong);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+      box-shadow: 0 0 18px rgba(112,225,200,.55);
+    }
+
+    /* ── Botones ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 24px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      font-family: "Manrope", sans-serif;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform .25s ease, border-color .25s ease, background .25s ease, box-shadow .25s ease;
+      border: 1px solid transparent;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      color: #06111d;
+      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+      box-shadow: 0 18px 40px rgba(112,225,200,.20);
+    }
+    .btn-primary:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* ═══════════════════════════════════════
+       SECCIÓN SOLICITUD
+    ═══════════════════════════════════════ */
+    .solicitud-section {
+      padding: 110px 0 130px;
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 54px;
+    }
+    .section-head h2 { margin: 18px 0 16px; }
+
+    /* ── Grid principal ── */
+    .solicitud-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    /* ── Panel lateral de info ── */
+    .solicitud-info {
+      position: sticky;
+      top: 96px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 30px;
+      backdrop-filter: blur(14px);
+    }
+
+    .solicitud-info h3 {
+      margin-bottom: 12px;
+    }
+
+    .info-points {
+      display: grid;
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .info-point {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(92,141,255,.12);
+      transition: border-color .2s ease;
+    }
+    .info-point:hover { border-color: var(--line-strong); }
+
+    .info-point-icon {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+    }
+
+    .info-point strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 5px;
+      font-size: .95rem;
+    }
+
+    .info-point p {
+      font-size: .9rem;
+    }
+
+    /* Contador de envíos */
+    .submission-counter {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 22px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(95,240,210,.07);
+      border: 1px solid rgba(95,240,210,.15);
+    }
+
+    .counter-pips {
+      display: flex;
+      gap: 7px;
+      flex-shrink: 0;
+    }
+
+    .counter-pip {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      border: 2px solid rgba(95,240,210,.35);
+      background: transparent;
+      transition: background .35s ease, border-color .35s ease, box-shadow .35s ease;
+    }
+
+    .counter-pip.used {
+      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+      border-color: transparent;
+      box-shadow: 0 0 10px rgba(95,240,210,.4);
+    }
+
+    .counter-pip.blocked {
+      background: rgba(255,143,143,.35);
+      border-color: rgba(255,143,143,.5);
+    }
+
+    .counter-text {
+      font-size: .87rem;
+      font-weight: 600;
+      color: var(--accent-strong);
+      line-height: 1.4;
+    }
+
+    /* ── Honeypot: oculto para humanos, visible para bots ── */
+    .hp-field {
+      opacity: 0;
+      position: absolute;
+      top: 0; left: 0;
+      height: 0; width: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Nota de integración */
+    .integration-note {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(92,141,255,.08);
+      border: 1px solid rgba(92,141,255,.18);
+    }
+
+    .integration-note p {
+      font-size: .88rem;
+      line-height: 1.6;
+    }
+
+    .integration-note code {
+      color: var(--accent-strong);
+      font-weight: 700;
+      background: rgba(95,240,210,.1);
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-size: .85rem;
+    }
+
+    /* ── Tarjeta del formulario ── */
+    .solicitud-form-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 34px;
+      backdrop-filter: blur(14px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Brillo decorativo en la esquina */
+    .solicitud-form-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -80px -80px auto;
+      width: 240px; height: 240px;
+      background: radial-gradient(circle, rgba(95,240,210,.16), transparent 70%);
+      pointer-events: none;
+    }
+
+    .form-header {
+      margin-bottom: 26px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    .form-header h3 { margin-bottom: 6px; }
+
+    /* ── Formulario ── */
+    .solicitud-form {
+      display: grid;
+      gap: 18px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .form-field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .form-field.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #d7e6f8;
+      font-size: .92rem;
+      font-weight: 600;
+    }
+
+    .form-label .required-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* Input / Select / Textarea base */
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      border: 1px solid rgba(92,141,255,.18);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 14px 16px;
+      font-family: "Manrope", sans-serif;
+      font-size: .97rem;
+      outline: none;
+      transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: #6b84a0;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: rgba(95,240,210,.48);
+      box-shadow: 0 0 0 3px rgba(95,240,210,.09);
+      background: rgba(255,255,255,.06);
+    }
+
+    /* Estados de validación */
+    .form-input.valid,
+    .form-select.valid,
+    .form-textarea.valid {
+      border-color: rgba(95,240,210,.35);
+    }
+
+    .form-input.invalid,
+    .form-select.invalid,
+    .form-textarea.invalid {
+      border-color: rgba(255,143,143,.45);
+      box-shadow: 0 0 0 3px rgba(255,143,143,.07);
+    }
+
+    /* Select con flecha personalizada */
+    .select-wrapper {
+      position: relative;
+    }
+    .select-wrapper::after {
+      content: "";
+      position: absolute;
+      right: 18px; top: 50%;
+      transform: translateY(-50%);
+      width: 0; height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid var(--muted);
+      pointer-events: none;
+    }
+    .form-select { padding-right: 42px; cursor: pointer; }
+    .form-select option { background: var(--surface-strong); color: var(--text); }
+
+    /* Textarea */
+    .form-textarea {
+      min-height: 150px;
+      resize: vertical;
+      line-height: 1.65;
+    }
+
+    /* Mensaje de error inline */
+    .field-error {
+      font-size: .83rem;
+      color: var(--danger);
+      font-weight: 600;
+      min-height: 18px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .field-error.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .field-error::before { content: "✕ "; font-size: .8rem; }
+
+    /* Contador de caracteres del textarea */
+    .char-count {
+      text-align: right;
+      font-size: .8rem;
+      color: var(--muted);
+      margin-top: -10px;
+      transition: color .2s ease;
+    }
+    .char-count.warn  { color: var(--warning); }
+    .char-count.limit { color: var(--danger);  }
+
+    /* ── Barra inferior del formulario ── */
+    .form-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+
+    .form-footer-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .spam-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .spam-badge::before {
+      content: "🛡";
+      font-size: .85rem;
+    }
+
+    .submit-btn {
+      border: 0;
+      min-width: 200px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animación de carga */
+    .submit-btn .btn-spinner {
+      display: none;
+      width: 18px; height: 18px;
+      border: 2px solid rgba(6,17,29,.3);
+      border-top-color: #06111d;
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+    }
+    .submit-btn.loading .btn-text { display: none; }
+    .submit-btn.loading .btn-spinner { display: block; }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ── Banner de estado global ── */
+    .form-status-banner {
+      display: none;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      font-size: .95rem;
+      font-weight: 600;
+      line-height: 1.5;
+      margin-top: 4px;
+      animation: bannerIn .3s ease;
+    }
+    .form-status-banner.show { display: flex; }
+
+    @keyframes bannerIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0);   }
+    }
+
+    .form-status-banner.success {
+      background: rgba(95,240,210,.09);
+      border: 1px solid rgba(95,240,210,.25);
+      color: var(--accent-strong);
+    }
+    .form-status-banner.error {
+      background: rgba(255,143,143,.07);
+      border: 1px solid rgba(255,143,143,.22);
+      color: var(--danger);
+    }
+    .form-status-banner.warning {
+      background: rgba(255,214,107,.08);
+      border: 1px solid rgba(255,214,107,.22);
+      color: var(--warning);
+    }
+
+    .banner-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── Banner de límite alcanzado ── */
+    .limit-overlay {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 16px;
+      padding: 40px 30px;
+      background:
+        radial-gradient(circle at top center, rgba(95,240,210,.12), transparent 50%),
+        rgba(4,11,20,.92);
+      border-radius: 20px;
+      border: 1px solid rgba(95,240,210,.18);
+      margin-top: 14px;
+    }
+    .limit-overlay.show { display: flex; }
+
+    .limit-icon { font-size: 2.8rem; }
+
+    .limit-overlay h4 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.25rem;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .limit-overlay p {
+      font-size: .95rem;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    /* ── Animaciones de reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════ */
+    @media (max-width: 1080px) {
+      .solicitud-grid {
+        grid-template-columns: 1fr;
+      }
+      .solicitud-info {
+        position: static;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .solicitud-section { padding: 84px 0 100px; }
+      .container { width: min(var(--max), calc(100% - 28px)); }
+      .solicitud-form-card { padding: 22px; }
+      .form-row { grid-template-columns: 1fr; }
+      .form-footer { flex-direction: column; align-items: stretch; }
+      .submit-btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       SECCIÓN SOLICITUD
+  ══════════════════════════════════════════════ -->
+  <section class="solicitud-section" id="solicitud" aria-label="Formulario de solicitud">
+    <div class="container">
+
+      <!-- Cabecera de sección -->
+      <div class="section-head reveal">
+        <div class="eyebrow">Solicitud</div>
+        <h2>Cuéntanos tu proyecto y te preparamos una propuesta</h2>
+        <p>
+          Si necesitas automatizar procesos, gestionar tu servidor, desarrollar una web o conectar APIs,
+          déjanos los datos y te responderemos con una propuesta a medida en menos de 48&nbsp;horas.
+        </p>
+      </div>
+
+      <!-- Grid: info + formulario -->
+      <div class="solicitud-grid">
+
+        <!-- ─── Panel lateral: razones para contactar ─── -->
+        <aside class="solicitud-info reveal">
+          <div class="eyebrow" style="margin-bottom:18px;">Por qué elegirnos</div>
+          <h3>Un equipo técnico con foco en resultados</h3>
+          <p>Cada solicitud es revisada personalmente. Sin bots intermedios, sin plantillas vacías.</p>
+
+          <div class="info-points">
+            <div class="info-point">
+              <div class="info-point-icon">⚙️</div>
+              <strong>Automatización de procesos</strong>
+              <p>Workflows, notificaciones y tareas repetitivas funcionando solos para liberar tiempo de tu equipo.</p>
+            </div>
+            <div class="info-point">
+              <div class="info-point-icon">🖥️</div>
+              <strong>Gestión de servidores</strong>
+              <p>Configuración, mantenimiento y monitorización de infraestructura lista para producción.</p>
+            </div>
+            <div class="info-point">
+              <div class="info-point-icon">🌐</div>
+              <strong>Desarrollo web</strong>
+              <p>Páginas, paneles y aplicaciones web con diseño profesional y enfoque en conversión.</p>
+            </div>
+            <div class="info-point">
+              <div class="info-point-icon">🔗</div>
+              <strong>Integraciones con APIs</strong>
+              <p>Conectamos tus herramientas para que los datos fluyan sin intervención manual.</p>
+            </div>
+          </div>
+
+          <!-- Contador visual de envíos -->
+          <div class="submission-counter">
+            <div class="counter-pips" id="counterPips" aria-label="Solicitudes enviadas">
+              <div class="counter-pip" id="pip1" aria-label="Solicitud 1"></div>
+              <div class="counter-pip" id="pip2" aria-label="Solicitud 2"></div>
+            </div>
+            <div class="counter-text" id="counterText">
+              Puedes enviar hasta 2 solicitudes en esta sesión.
+            </div>
+          </div>
+
+          <!-- Nota técnica Discord Webhook -->
+          <div class="integration-note">
+            <p>
+            
+            </p>
+          </div>
+        </aside>
+
+        <!-- ─── Tarjeta del formulario ─── -->
+        <div class="solicitud-form-card reveal">
+          <div class="form-header">
+            <h3>Envía tu solicitud</h3>
+            <p>Todos los campos marcados con <span style="color:var(--accent);font-weight:700;">•</span> son obligatorios.</p>
+          </div>
+
+          <!-- Formulario principal -->
+          <form class="solicitud-form" id="solicitudForm" novalidate>
+
+            <!-- ── HONEYPOT: campo invisible para humanos.
+                 Los bots lo rellenan automáticamente → rechazo silencioso. ── -->
+            <div class="hp-field" aria-hidden="true">
+              <label for="fieldWebsite">Website</label>
+              <input
+                type="text"
+                id="fieldWebsite"
+                name="website"
+                tabindex="-1"
+                autocomplete="off"
+              />
+            </div>
+
+            <!-- Fila: Nombre + Email -->
+            <div class="form-row">
+              <!-- Nombre -->
+              <div class="form-field">
+                <label class="form-label" for="fieldName">
+                  <span class="required-dot" aria-hidden="true"></span>
+                  Nombre completo
+                </label>
+                <input
+                  class="form-input"
+                  id="fieldName"
+                  name="nombre"
+                  type="text"
+                  placeholder="Ana García"
+                  autocomplete="name"
+                  maxlength="80"
+                  required
+                  aria-describedby="errorName"
+                />
+                <div class="field-error" id="errorName" role="alert" aria-live="polite"></div>
+              </div>
+
+              <!-- Email -->
+              <div class="form-field">
+                <label class="form-label" for="fieldEmail">
+                  <span class="required-dot" aria-hidden="true"></span>
+                  Correo electrónico
+                </label>
+                <input
+                  class="form-input"
+                  id="fieldEmail"
+                  name="email"
+                  type="email"
+                  placeholder="ana@empresa.com"
+                  autocomplete="email"
+                  required
+                  aria-describedby="errorEmail"
+                />
+                <div class="field-error" id="errorEmail" role="alert" aria-live="polite"></div>
+              </div>
+            </div>
+
+            <!-- Fila: Servicio + Empresa (opcional) -->
+            <div class="form-row">
+              <!-- Servicio requerido -->
+              <div class="form-field">
+                <label class="form-label" for="fieldService">
+                  <span class="required-dot" aria-hidden="true"></span>
+                  Tipo de servicio
+                </label>
+                <div class="select-wrapper">
+                  <select
+                    class="form-select"
+                    id="fieldService"
+                    name="servicio"
+                    required
+                    aria-describedby="errorService"
+                  >
+                    <option value="" disabled selected>Selecciona una opción</option>
+                    <option value="Automatización de procesos">Automatización de procesos</option>
+                    <option value="Gestión de servidores">Gestión de servidores</option>
+                    <option value="Desarrollo web">Desarrollo web</option>
+                    <option value="Integración con APIs">Integración con APIs</option>
+                    <option value="Bot para WhatsApp o Telegram">Bot para WhatsApp o Telegram</option>
+                    <option value="Hosting y despliegue">Hosting y despliegue</option>
+                    <option value="Solución completa">Solución completa</option>
+                    <option value="Personalizada">Personalizada</option>
+                  </select>
+                </div>
+                <div class="field-error" id="errorService" role="alert" aria-live="polite"></div>
+              </div>
+
+              <!-- Empresa (opcional) -->
+              <div class="form-field">
+                <label class="form-label" for="fieldCompany">
+                  Empresa <span style="color:var(--muted);font-weight:400;font-size:.83rem;">(opcional)</span>
+                </label>
+                <input
+                  class="form-input"
+                  id="fieldCompany"
+                  name="empresa"
+                  type="text"
+                  placeholder="Mi Empresa S.L."
+                  autocomplete="organization"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+
+            <!-- Mensaje -->
+            <div class="form-field full">
+              <label class="form-label" for="fieldMessage">
+                <span class="required-dot" aria-hidden="true"></span>
+                Descripción del proyecto
+              </label>
+              <textarea
+                class="form-textarea"
+                id="fieldMessage"
+                name="mensaje"
+                placeholder="Cuéntanos qué quieres conseguir: qué proceso necesitas automatizar, qué tipo de web buscas, qué integraciones necesitas o qué problema quieres resolver..."
+                maxlength="1200"
+                required
+                aria-describedby="errorMessage charCount"
+              ></textarea>
+              <div class="char-count" id="charCount" aria-live="polite">0 / 1200 caracteres</div>
+              <div class="field-error" id="errorMessage" role="alert" aria-live="polite"></div>
+            </div>
+
+            <!-- Banner de estado -->
+            <div class="form-status-banner" id="statusBanner" role="status" aria-live="polite">
+              <span class="banner-icon" id="statusIcon" aria-hidden="true"></span>
+              <span id="statusText"></span>
+            </div>
+
+            <!-- Banner de límite alcanzado -->
+            <div class="limit-overlay" id="limitOverlay">
+              <div class="limit-icon">🚫</div>
+              <h4>Límite de sesión alcanzado</h4>
+              <p>Ya has enviado 2 solicitudes en esta sesión. Para más consultas, contáctanos directamente por WhatsApp o email.</p>
+            </div>
+
+            <!-- Pie: meta + botón enviar -->
+            <div class="form-footer">
+              <div class="form-footer-meta">
+                <span class="spam-badge"></span>
+                <span style="font-size:.8rem;color:var(--muted);">Tu información no se compartirá con terceros.</span>
+              </div>
+              <button
+                class="btn btn-primary submit-btn"
+                id="submitBtn"
+                type="submit"
+                aria-label="Enviar solicitud"
+              >
+                <span class="btn-text">Enviar solicitud →</span>
+                <span class="btn-spinner" aria-hidden="true"></span>
+              </button>
+            </div>
+
+          </form>
+        </div><!-- / solicitud-form-card -->
+
+      </div><!-- / solicitud-grid -->
+    </div><!-- / container -->
+  </section>
+
+  <!-- ═════════════════════════════════════════════
+       SCRIPT
+  ═════════════════════════════════════════════ -->
+  <script>
+    /* configuración receptor*/
+    const FORM_API_ENDPOINT = "https://your-worker.your-subdomain.workers.dev";
+
+    /* Límite de envíos por sesión (también limitado por rate-limit) */
+    const MAX_SUBMISSIONS = 2;
+
+    /* ════════════════════════════════════════════════════════════════
+       ANTI-SPAM — CONFIGURACIÓN
+       ════════════════════════════════════════════════════════════════ */
+
+    /* [1] Tiempo mínimo de cumplimentación en ms (3 s).
+           Envíos más rápidos = bot. */
+    const MIN_FILL_TIME_MS = 3000;
+
+    /* [5] Bloqueo progresivo por IP simulada en localStorage:
+           Cada intento inválido extra añade BLOCK_STEP_MS más de espera.
+           Máximo: BLOCK_MAX_MS. */
+    const BLOCK_STEP_MS  = 60_000;   // +1 min por infracción
+    const BLOCK_MAX_MS   = 600_000;  // 10 min máximo
+    const RATE_WINDOW_MS = 600_000;  // Ventana de rate-limit: 10 min
+    const RATE_MAX_HITS  =  5;       // Máx. 5 envíos en esa ventana
+
+    /* ════════════════════════════════════════════════════════════════
+       [4] TOKEN ÚNICO ANTI-REPLAY
+       Genera un token al cargar la página. Se invalida tras el primer
+       uso exitoso. Si el mismo token intenta enviarse dos veces,
+       se rechaza (protección contra replay / doble-submit).
+       ════════════════════════════════════════════════════════════════ */
+    function generateToken() {
+      const arr = new Uint8Array(24);
+      crypto.getRandomValues(arr);
+      return Array.from(arr).map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+    let sessionToken     = generateToken();
+    let tokenConsumed    = false;   // true después del primer envío exitoso
+
+    /* ════════════════════════════════════════════════════════════════
+       [3] TIEMPO DE CARGA DEL FORMULARIO
+       Se registra el momento exacto en que se cargó la página.
+       En el submit se compara para detectar bots que envían al instante.
+       ════════════════════════════════════════════════════════════════ */
+    const FORM_LOAD_TIME = Date.now();
+
+    /* ════════════════════════════════════════════════════════════════
+       [1] + [5] RATE-LIMIT Y BLOQUEO PROGRESIVO EN CLIENTE
+       Usamos localStorage con clave neutra para no dar pistas a bots.
+       Estructura almacenada:
+         { hits: [timestamp, ...], blocked_until: timestamp, infractions: n }
+       ════════════════════════════════════════════════════════════════ */
+    const RL_KEY = "_af_rl";  // clave opaca en localStorage
+
+    function getRLState() {
+      try {
+        return JSON.parse(localStorage.getItem(RL_KEY)) || { hits: [], blocked_until: 0, infractions: 0 };
+      } catch { return { hits: [], blocked_until: 0, infractions: 0 }; }
+    }
+
+    function saveRLState(state) {
+      try { localStorage.setItem(RL_KEY, JSON.stringify(state)); } catch {}
+    }
+
+    /* Devuelve null si OK, o un mensaje de error si hay que bloquear */
+    function checkRateLimit() {
+      const now   = Date.now();
+      const state = getRLState();
+
+      /* ¿Está bloqueado? */
+      if (state.blocked_until > now) {
+        const secsLeft = Math.ceil((state.blocked_until - now) / 1000);
+        const mins     = Math.floor(secsLeft / 60);
+        const secs     = secsLeft % 60;
+        return `Demasiados intentos. Por favor espera ${mins > 0 ? mins + " min " : ""}${secs} seg antes de volver a intentarlo.`;
+      }
+
+      /* Limpiar hits fuera de la ventana */
+      state.hits = state.hits.filter(t => now - t < RATE_WINDOW_MS);
+
+      if (state.hits.length >= RATE_MAX_HITS) {
+        /* Calcular duración de bloqueo progresivo */
+        state.infractions = (state.infractions || 0) + 1;
+        const blockDuration = Math.min(state.infractions * BLOCK_STEP_MS, BLOCK_MAX_MS);
+        state.blocked_until = now + blockDuration;
+        saveRLState(state);
+        const mins = Math.round(blockDuration / 60000);
+        return `Has superado el límite de ${RATE_MAX_HITS} envíos. Acceso bloqueado ${mins} minuto${mins !== 1 ? "s" : ""}.`;
+      }
+
+      return null; // OK
+    }
+
+    /* Registra un hit exitoso */
+    function recordHit() {
+      const state = getRLState();
+      state.hits.push(Date.now());
+      saveRLState(state);
+    }
+
+    /* Registra una infracción sin hit (honeypot, replay, etc.) */
+    function recordInfraction() {
+      const state = getRLState();
+      state.infractions = (state.infractions || 0) + 1;
+      const blockDuration = Math.min(state.infractions * BLOCK_STEP_MS, BLOCK_MAX_MS);
+      state.blocked_until = Date.now() + blockDuration;
+      saveRLState(state);
+
+      /* Log en consola para monitorización */
+      console.warn("[AutoFlow/AntiSpam] Infracción registrada. Bloqueo:", Math.round(blockDuration/1000), "s. Total infracciones:", state.infractions);
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       REFERENCIAS AL DOM
+       ════════════════════════════════════════════════════════════════ */
+    const form         = document.getElementById("solicitudForm");
+    const submitBtn    = document.getElementById("submitBtn");
+    const statusBanner = document.getElementById("statusBanner");
+    const statusIcon   = document.getElementById("statusIcon");
+    const statusText   = document.getElementById("statusText");
+    const limitOverlay = document.getElementById("limitOverlay");
+    const charCount    = document.getElementById("charCount");
+    const counterText  = document.getElementById("counterText");
+    const pip1         = document.getElementById("pip1");
+    const pip2         = document.getElementById("pip2");
+
+    const fieldName    = document.getElementById("fieldName");
+    const fieldEmail   = document.getElementById("fieldEmail");
+    const fieldService = document.getElementById("fieldService");
+    const fieldMessage = document.getElementById("fieldMessage");
+    const fieldHP      = document.getElementById("fieldWebsite");  // honeypot
+
+    /* Estado de sesión */
+    let submissionsThisSession = 0;
+
+    /* ════════════════════════════════════════════════════════════════
+       REVEAL ANIMATION
+       ════════════════════════════════════════════════════════════════ */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add("visible"), i * 80);
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+
+    /* ════════════════════════════════════════════════════════════════
+       VALIDACIÓN: Reglas por campo
+       ════════════════════════════════════════════════════════════════ */
+    const VALIDATORS = {
+      nombre(val) {
+        if (!val.trim())             return "El nombre es obligatorio.";
+        if (/\d/.test(val))          return "El nombre no puede contener números.";
+        if (val.trim().length < 2)   return "El nombre debe tener al menos 2 caracteres.";
+        if (val.trim().length > 80)  return "El nombre no puede superar 80 caracteres.";
+        return null;
+      },
+      email(val) {
+        if (!val.trim()) return "El correo electrónico es obligatorio.";
+        if (!val.includes("@")) return "El correo debe incluir el símbolo @.";
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+        if (!re.test(val.trim())) return "Introduce un correo válido (ej.: nombre@empresa.com).";
+        return null;
+      },
+      servicio(val) {
+        if (!val) return "Selecciona el tipo de servicio que necesitas.";
+        return null;
+      },
+      mensaje(val) {
+        if (!val.trim())            return "Describe brevemente tu proyecto o necesidad.";
+        if (val.trim().length < 20) return "Por favor, añade un poco más de detalle (mín. 20 caracteres).";
+        return null;
+      }
+    };
+
+    /* ── Muestra / oculta error inline ── */
+    function setFieldState(input, errorEl, errorMsg) {
+      if (errorMsg) {
+        input.classList.remove("valid");
+        input.classList.add("invalid");
+        errorEl.textContent = errorMsg;
+        errorEl.classList.add("show");
+        input.setAttribute("aria-invalid", "true");
+      } else {
+        input.classList.remove("invalid");
+        input.classList.add("valid");
+        errorEl.textContent = "";
+        errorEl.classList.remove("show");
+        input.setAttribute("aria-invalid", "false");
+      }
+    }
+
+    function validateField(input, validatorKey, errorEl) {
+      const err = VALIDATORS[validatorKey](input.value);
+      setFieldState(input, errorEl, err);
+      return err === null;
+    }
+
+    function validateAll() {
+      const v1 = validateField(fieldName,    "nombre",   document.getElementById("errorName"));
+      const v2 = validateField(fieldEmail,   "email",    document.getElementById("errorEmail"));
+      const v3 = validateField(fieldService, "servicio", document.getElementById("errorService"));
+      const v4 = validateField(fieldMessage, "mensaje",  document.getElementById("errorMessage"));
+      return v1 && v2 && v3 && v4;
+    }
+
+    /* ── Validación en tiempo real ── */
+    fieldName.addEventListener("blur",       () => validateField(fieldName,    "nombre",   document.getElementById("errorName")));
+    fieldEmail.addEventListener("blur",      () => validateField(fieldEmail,   "email",    document.getElementById("errorEmail")));
+    fieldService.addEventListener("change",  () => validateField(fieldService, "servicio", document.getElementById("errorService")));
+    fieldMessage.addEventListener("blur",    () => validateField(fieldMessage, "mensaje",  document.getElementById("errorMessage")));
+
+    fieldName.addEventListener("input", () => {
+      if (/\d/.test(fieldName.value)) fieldName.value = fieldName.value.replace(/\d/g, "");
+      if (fieldName.classList.contains("invalid") || fieldName.classList.contains("valid")) {
+        validateField(fieldName, "nombre", document.getElementById("errorName"));
+      }
+    });
+
+    fieldEmail.addEventListener("input", () => {
+      if (fieldEmail.classList.contains("invalid") || fieldEmail.classList.contains("valid")) {
+        validateField(fieldEmail, "email", document.getElementById("errorEmail"));
+      }
+    });
+
+    /* ── Contador de caracteres ── */
+    fieldMessage.addEventListener("input", () => {
+      const len = fieldMessage.value.length;
+      charCount.textContent = `${len} / 1200 caracteres`;
+      charCount.classList.toggle("warn",  len > 900  && len <= 1100);
+      charCount.classList.toggle("limit", len > 1100);
+      if (fieldMessage.classList.contains("invalid") || fieldMessage.classList.contains("valid")) {
+        validateField(fieldMessage, "mensaje", document.getElementById("errorMessage"));
+      }
+    });
+
+    /* ── Contador visual de envíos ── */
+    function updateCounter(count) {
+      const pips = [pip1, pip2];
+      pips.forEach((pip, i) => {
+        pip.classList.remove("used", "blocked");
+        if (i < count) pip.classList.add(count >= MAX_SUBMISSIONS ? "blocked" : "used");
+      });
+      const remaining = MAX_SUBMISSIONS - count;
+      if (remaining <= 0) {
+        counterText.textContent = "Límite de sesión alcanzado. Contáctanos directamente.";
+        counterText.style.color = "var(--danger)";
+      } else if (remaining === 1) {
+        counterText.textContent = "Te queda 1 envío en esta sesión.";
+        counterText.style.color = "var(--warning)";
+      } else {
+        counterText.textContent = '';
+        counterText.style.color = "";
+      }
+    }
+
+    /* ── Banner de estado global ── */
+    function showBanner(type, icon, message) {
+      statusBanner.className = `form-status-banner show ${type}`;
+      statusIcon.textContent = icon;
+      statusText.textContent = message;
+      statusBanner.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+    function hideBanner() { statusBanner.classList.remove("show"); }
+
+    /* ── Bloqueo por límite de sesión ── */
+    function applySessionLimit() {
+      form.querySelectorAll("input, select, textarea").forEach(el => el.disabled = true);
+      submitBtn.disabled = true;
+      limitOverlay.classList.add("show");
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       ENVÍO DEL FORMULARIO — con todas las protecciones anti-spam
+       ════════════════════════════════════════════════════════════════ */
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      hideBanner();
+
+      /* — Límite de sesión — */
+      if (submissionsThisSession >= MAX_SUBMISSIONS) {
+        showBanner("warning", "⚠️", "Has alcanzado el límite de 2 solicitudes por sesión. Contáctanos directamente.");
+        return;
+      }
+
+      /* ── [2] HONEYPOT CHECK ──────────────────────────────────────
+         Si el campo oculto "website" tiene valor → es un bot.
+         Registramos infracción y rechazamos en silencio (sin mensaje
+         de error real para no dar pistas al atacante).            */
+      if (fieldHP && fieldHP.value.trim() !== "") {
+        console.warn("[AutoFlow/AntiSpam] Honeypot activado. Envío rechazado.");
+        recordInfraction();
+        /* Simular éxito para no alertar al bot */
+        submitBtn.classList.add("loading");
+        submitBtn.disabled = true;
+        await new Promise(r => setTimeout(r, 1400));
+        submitBtn.classList.remove("loading");
+        showBanner("success", "✔", "¡Solicitud enviada! Te responderemos pronto.");
+        form.reset();
+        submitBtn.disabled = false;
+        return;
+      }
+
+      /* ── [3] TIEMPO MÍNIMO DE CUMPLIMENTACIÓN ───────────────────
+         Si el formulario se envía antes de MIN_FILL_TIME_MS desde
+         que cargó la página, casi seguro es un bot.              */
+      const fillTime = Date.now() - FORM_LOAD_TIME;
+      if (fillTime < MIN_FILL_TIME_MS) {
+        console.warn("[AutoFlow/AntiSpam] Envío demasiado rápido:", fillTime, "ms");
+        recordInfraction();
+        showBanner("error", "✕", "Por favor, revisa el formulario antes de enviarlo.");
+        return;
+      }
+
+      /* ── [4] TOKEN ANTI-REPLAY ───────────────────────────────────
+         Si el token ya fue consumido, este es un reenvío duplicado
+         o un intento de replay.                                   */
+      if (tokenConsumed) {
+        console.warn("[AutoFlow/AntiSpam] Token ya consumido. Posible replay.");
+        showBanner("error", "✕", "Sesión caducada. Recarga la página para enviar una nueva solicitud.");
+        return;
+      }
+
+      /* ── [1] RATE-LIMIT CLIENTE ─────────────────────────────────
+         Máximo RATE_MAX_HITS envíos en RATE_WINDOW_MS.
+         Con bloqueo progresivo [5] si se supera.                 */
+      const rlError = checkRateLimit();
+      if (rlError) {
+        showBanner("warning", "🚫", rlError);
+        return;
+      }
+
+      /* — Validación de campos — */
+      if (!validateAll()) {
+        showBanner("error", "✕", "Por favor, corrige los errores señalados antes de enviar.");
+        const firstInvalid = form.querySelector("[aria-invalid='true']");
+        if (firstInvalid) firstInvalid.focus();
+        return;
+      }
+
+      /* — Aviso modo demo — */
+      if (!FORM_API_ENDPOINT) {
+        showBanner("warning", "⚙️", "Formulario en modo demo: añade la URL de tu Cloudflare Worker para activar los envíos.");
+        submitBtn.classList.add("loading");
+        submitBtn.disabled = true;
+        await new Promise(r => setTimeout(r, 1200));
+        submitBtn.classList.remove("loading");
+        submissionsThisSession++;
+        updateCounter(submissionsThisSession);
+        tokenConsumed = true;                        // [4] Invalida el token
+        showBanner("success", "✔", "Demo: solicitud procesada. (Añade el Webhook para envíos reales.)");
+        form.reset();
+        [fieldName, fieldEmail, fieldService, fieldMessage].forEach(f => f.classList.remove("valid"));
+        charCount.textContent = "0 / 1200 caracteres";
+        if (submissionsThisSession >= MAX_SUBMISSIONS) applySessionLimit();
+        submitBtn.disabled = false;
+        return;
+      }
+
+      /* ── Envío real al backend ── */
+      submitBtn.classList.add("loading");
+      submitBtn.disabled = true;
+
+      try {
+        const nombre   = fieldName.value.trim();
+        const email    = fieldEmail.value.trim();
+        const servicio = fieldService.value.trim();
+        const empresa  = document.getElementById("fieldCompany").value.trim();
+        const mensaje  = fieldMessage.value.trim();
+        const payload = {
+          name: nombre,
+          email,
+          service: servicio,
+          company: empresa,
+          message: mensaje,
+          sessionToken
+        };
+
+        const response = await fetch(FORM_API_ENDPOINT, {
+          method:  "POST",
+          headers: { "Content-Type": "application/json" },
+          body:    JSON.stringify(payload)
+        });
+
+        const result = await response.json().catch(() => null);
+        if (!response.ok) throw new Error(result?.error || `Error del servidor (${response.status})`);
+
+        /* ── Éxito ── */
+        tokenConsumed = true;              // [4] Invalida el token tras uso exitoso
+        recordHit();                       // [1] Registra hit en rate-limiter
+        submissionsThisSession++;
+        updateCounter(submissionsThisSession);
+
+        showBanner("success", "✔", "¡Solicitud enviada! Te responderemos en menos de 48 horas con una propuesta personalizada.");
+
+        form.reset();
+        [fieldName, fieldEmail, fieldService, fieldMessage].forEach(f => {
+          f.classList.remove("valid", "invalid");
+        });
+        charCount.textContent = "0 / 1200 caracteres";
+        charCount.classList.remove("warn", "limit");
+
+        if (submissionsThisSession >= MAX_SUBMISSIONS) applySessionLimit();
+
+      } catch (err) {
+        showBanner("error", "✕", "No se pudo enviar la solicitud. Revisa tu conexión o inténtalo de nuevo.");
+        console.error("[AutoFlow/Solicitud] Error Worker:", err);
+      } finally {
+        submitBtn.classList.remove("loading");
+        if (submissionsThisSession < MAX_SUBMISSIONS) submitBtn.disabled = false;
+      }
+    });
+
+    /* ── INIT ── */
+    updateCounter(0);
+
+    /* ════════════════════════════════════════════════════════════════
+       NOTA SOBRE EL WORKER DE CLOUDFLARE (backend)
+       ════════════════════════════════════════════════════════════════
+       Para protección completa de IP real en producción, despliega el
+       archivo "autoflow-worker.js" como Cloudflare Worker (gratuito).
+       Cambia FORM_API_ENDPOINT por la URL de tu Worker.
+       El Worker aplica:
+         • Rate-limit real por IP (KV store)
+         • Validación del token de sesión
+         • Reenvío seguro al webhook (la URL real queda oculta)
+         • Logging de IPs abusivas
+       ════════════════════════════════════════════════════════════════ */
+  </script>
+
+</body>
+</html>

@@ -233,6 +233,14 @@
       flex: 0 0 auto;
     }
 
+    .nav-form-cta {
+      box-shadow: 0 0 0 1.5px rgba(95, 240, 210, 0.55), 0 12px 28px rgba(95, 240, 210, 0.22);
+    }
+
+    .nav-form-cta:hover {
+      box-shadow: 0 0 0 2px rgba(95, 240, 210, 0.8), 0 16px 36px rgba(95, 240, 210, 0.32);
+    }
+
     .hero {
       padding: 64px 0 96px;
     }
@@ -661,144 +669,6 @@
       color: var(--text);
     }
 
-    .form-section-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
-      gap: 24px;
-      align-items: stretch;
-    }
-
-    .form-info,
-    .lead-form-card {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 30px;
-      backdrop-filter: blur(14px);
-    }
-
-    .form-info p {
-      margin-top: 14px;
-      max-width: 540px;
-    }
-
-    .form-points {
-      display: grid;
-      gap: 14px;
-      margin-top: 24px;
-    }
-
-    .form-point {
-      padding: 16px 18px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(92,141,255,0.12);
-    }
-
-    .form-point strong {
-      display: block;
-      color: var(--text);
-      margin-bottom: 6px;
-    }
-
-    .form-code-note {
-      margin-top: 24px;
-      padding: 16px 18px;
-      border-radius: 18px;
-      background: rgba(95,240,210,0.08);
-      border: 1px solid rgba(95,240,210,0.16);
-    }
-
-    .form-code-note code {
-      color: var(--accent-strong);
-      font-weight: 700;
-    }
-
-    .lead-form {
-      display: grid;
-      gap: 16px;
-    }
-
-    .lead-form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .lead-form-field {
-      display: grid;
-      gap: 8px;
-    }
-
-    .lead-form-field.full {
-      grid-column: 1 / -1;
-    }
-
-    .lead-form label {
-      color: #d7e6f8;
-      font-size: 0.92rem;
-      font-weight: 600;
-    }
-
-    .lead-form input,
-    .lead-form select,
-    .lead-form textarea {
-      width: 100%;
-      border: 1px solid rgba(92,141,255,0.18);
-      background: rgba(255,255,255,0.04);
-      color: var(--text);
-      border-radius: 16px;
-      padding: 14px 16px;
-      font: inherit;
-      outline: none;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .lead-form input:focus,
-    .lead-form select:focus,
-    .lead-form textarea:focus {
-      border-color: rgba(95,240,210,0.42);
-      box-shadow: 0 0 0 3px rgba(95,240,210,0.08);
-    }
-
-    .lead-form input::placeholder,
-    .lead-form textarea::placeholder {
-      color: #7d93ac;
-    }
-
-    .lead-form textarea {
-      min-height: 140px;
-      resize: vertical;
-    }
-
-    .lead-form-actions {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-top: 4px;
-    }
-
-    .lead-form-submit {
-      border: 0;
-      cursor: pointer;
-    }
-
-    .lead-form-status {
-      color: var(--muted);
-      font-size: 0.92rem;
-      min-height: 24px;
-    }
-
-    .lead-form-status.success {
-      color: var(--accent-strong);
-    }
-
-    .lead-form-status.error {
-      color: #ffb5b5;
-    }
-
     .stack-tags {
       display: flex;
       flex-wrap: wrap;
@@ -1156,10 +1026,6 @@
     }
 
     @media (max-width: 1080px) {
-      .form-section-grid {
-        grid-template-columns: 1fr;
-      }
-
       .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .service-card { grid-column: auto; }
       .value-grid,
@@ -1170,15 +1036,6 @@
     }
 
     @media (max-width: 760px) {
-      .lead-form-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .form-info,
-      .lead-form-card {
-        padding: 22px;
-      }
-
       section { padding: 84px 0; }
       .container { width: min(var(--max), calc(100% - 28px)); }
       .nav-links { display: none; }
@@ -1242,6 +1099,7 @@
         <a href="#soluciones">Soluciones</a>
         <a href="#contacto">Contacto</a>
       </div>
+      <a href="SAF.html" class="btn btn-primary nav-cta nav-form-cta">Rellenar formulario</a>
       <a
         href="https://wa.me/34600000000?text=Hola,%20quiero%20informacion%20sobre%20automatizaciones%20y%20bots"
         target="_blank"
@@ -1554,102 +1412,6 @@
       </div>
     </section>
 
-    <section id="formulario">
-      <div class="container">
-        <div class="section-head reveal">
-          <div class="eyebrow">Formulario</div>
-          <h2>Cuéntanos tu proyecto y te preparamos una propuesta</h2>
-          <p>
-            Si necesitas un bot, una automatización, una integración o una web, déjanos los datos y te responderemos con una propuesta adaptada.
-          </p>
-        </div>
-
-        <div class="form-section-grid">
-          <div class="form-info reveal">
-            <h3>Un formulario hecho para AutoFlow</h3>
-            <p>
-              Está pensado para captar solicitudes reales de clientes que buscan automatizar procesos, montar bots, conectar APIs o desarrollar una web profesional.
-            </p>
-
-            <div class="form-points">
-              <div class="form-point">
-                <strong>Más útil que un formulario genérico</strong>
-                <p>El usuario puede indicar exactamente qué servicio necesita.</p>
-              </div>
-              <div class="form-point">
-                <strong>Preparado para convertir</strong>
-                <p>Recoge la información mínima pero importante para empezar una conversación comercial seria.</p>
-              </div>
-              <div class="form-point">
-                <strong>Listo para Formspree</strong>
-                <p>Solo tendrás que poner tu ID y ya podrá enviarte los leads directamente.</p>
-              </div>
-            </div>
-
-            <div class="form-code-note">
-              Solo cambia esta línea del script:
-              <br />
-              <code>const FORM_ID = "TU_ID_AQUI";</code>
-            </div>
-          </div>
-
-          <div class="lead-form-card reveal">
-            <form class="lead-form" id="leadForm">
-              <div class="lead-form-grid">
-                <div class="lead-form-field">
-                  <label for="leadName">Nombre</label>
-                  <input id="leadName" name="nombre" type="text" placeholder="Tu nombre" required />
-                </div>
-
-                <div class="lead-form-field">
-                  <label for="leadCompany">Empresa</label>
-                  <input id="leadCompany" name="empresa" type="text" placeholder="Nombre de tu empresa" />
-                </div>
-
-                <div class="lead-form-field">
-                  <label for="leadEmail">Email</label>
-                  <input id="leadEmail" name="email" type="email" placeholder="tuemail@empresa.com" required />
-                </div>
-
-                <div class="lead-form-field">
-                  <label for="leadPhone">Teléfono</label>
-                  <input id="leadPhone" name="telefono" type="tel" placeholder="+34 600 000 000" />
-                </div>
-
-                <div class="lead-form-field full">
-                  <label for="leadService">Qué necesitas</label>
-                  <select id="leadService" name="servicio" required>
-                    <option value="">Selecciona una opción</option>
-                    <option value="Bot para WhatsApp o Telegram">Bot para WhatsApp o Telegram</option>
-                    <option value="Automatización de procesos">Automatización de procesos</option>
-                    <option value="Integración con APIs">Integración con APIs</option>
-                    <option value="Desarrollo web">Desarrollo web</option>
-                    <option value="Hosting y despliegue">Hosting y despliegue</option>
-                    <option value="Solución completa">Solución completa</option>
-                  </select>
-                </div>
-
-                <div class="lead-form-field full">
-                  <label for="leadMessage">Cuéntanos tu proyecto</label>
-                  <textarea
-                    id="leadMessage"
-                    name="mensaje"
-                    placeholder="Explícanos qué quieres automatizar, qué tipo de bot necesitas o qué web quieres montar..."
-                    required
-                  ></textarea>
-                </div>
-              </div>
-
-              <div class="lead-form-actions">
-                <button class="btn btn-primary lead-form-submit" type="submit">Enviar solicitud</button>
-                <div class="lead-form-status" id="leadFormStatus">Completa el formulario y envíanos tu idea.</div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section id="contacto">
       <div class="container">
         <div class="cta-panel reveal" style="margin-bottom: 24px;">
@@ -1896,47 +1658,6 @@ Puedes preguntarme por:
       }, 500);
     });
 
-    const leadForm = document.getElementById("leadForm");
-    const leadFormStatus = document.getElementById("leadFormStatus");
-    const FORM_ID = "TU_ID_AQUI";
-
-    leadForm.addEventListener("submit", async (event) => {
-      event.preventDefault();
-
-      if (FORM_ID === "TU_ID_AQUI") {
-        leadFormStatus.textContent = 'Solo te falta cambiar `const FORM_ID = "TU_ID_AQUI";` por tu ID real de Formspree.';
-        leadFormStatus.className = "lead-form-status error";
-        return;
-      }
-
-      const formData = new FormData(leadForm);
-
-      leadFormStatus.textContent = "Enviando solicitud...";
-      leadFormStatus.className = "lead-form-status";
-
-      try {
-        const response = await fetch(`https://formspree.io/f/${FORM_ID}`, {
-          method: "POST",
-          headers: {
-            Accept: "application/json"
-          },
-          body: formData
-        });
-
-        const result = await response.json();
-
-        if (!response.ok) {
-          throw new Error(result?.error || "No se pudo enviar el formulario");
-        }
-
-        leadForm.reset();
-        leadFormStatus.textContent = "Solicitud enviada correctamente. Te responderemos lo antes posible.";
-        leadFormStatus.className = "lead-form-status success";
-      } catch (error) {
-        leadFormStatus.textContent = "Hubo un problema al enviar el formulario. Revisa tu ID de Formspree o inténtalo de nuevo.";
-        leadFormStatus.className = "lead-form-status error";
-      }
-    });
   </script>
 </body>
 </html>
