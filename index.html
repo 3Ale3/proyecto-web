@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AutoFlow | Automatizaciones, bots y desarrollo web</title>
+  <title>Zynkly Tech | Automatizaciones, bots y desarrollo web</title>
   <meta
     name="description"
     content="Creamos automatizaciones, bots para WhatsApp y Telegram, integraciones con APIs, desarrollo web y soluciones de hosting para empresas que quieren escalar sin perder tiempo."
@@ -200,6 +200,9 @@
     }
 
     .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
       font-size: 1.35rem;
       font-weight: 700;
       letter-spacing: -0.04em;
@@ -207,7 +210,14 @@
       flex: 0 0 auto;
     }
 
-    .brand span { color: var(--accent); }
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .brand-text span { color: var(--accent); }
 
     .nav-links {
       display: flex;
@@ -706,7 +716,7 @@
     }
 
     .contact-grid {
-      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      grid-template-columns: minmax(0, 1fr);
       align-items: stretch;
     }
 
@@ -1092,7 +1102,10 @@
 <body>
   <nav class="site-nav">
     <div class="container nav-inner">
-      <a href="#inicio" class="brand">Auto<span>Flow</span></a>
+      <a href="#inicio" class="brand">
+        <img src="LogoWW.png" alt="Zynkly Tech" class="brand-logo" />
+        <span class="brand-text">Zynkly <span>Tech</span></span>
+      </a>
       <div class="nav-links">
         <a href="#servicios">Servicios</a>
         <a href="#proceso">Proceso</a>
@@ -1101,7 +1114,7 @@
       </div>
       <a href="SAF.html" class="btn btn-primary nav-cta nav-form-cta">Rellenar formulario</a>
       <a
-        href="https://wa.me/34600000000?text=Hola,%20quiero%20informacion%20sobre%20automatizaciones%20y%20bots"
+        href="https://wa.me/34603964640?text=Hola,%20quiero%20informacion%20sobre%20automatizaciones%20y%20bots"
         target="_blank"
         rel="noopener noreferrer"
         class="btn btn-primary nav-cta"
@@ -1120,7 +1133,7 @@
           </p>
           <div class="btn-row">
             <a
-              href="https://wa.me/34600000000?text=Hola,%20quiero%20mejorar%20mi%20negocio%20con%20automatizaciones"
+              href="https://wa.me/34603964640?text=Hola,%20quiero%20mejorar%20mi%20negocio%20con%20automatizaciones"
               target="_blank"
               rel="noopener noreferrer"
               class="btn btn-primary"
@@ -1422,54 +1435,16 @@
           </p>
           <div class="btn-row" style="justify-content:center;">
             <a
-              href="https://wa.me/34600000000?text=Hola,%20quiero%20informacion%20sobre%20vuestros%20servicios"
+              href="https://wa.me/34603964640?text=Hola,%20quiero%20informacion%20sobre%20vuestros%20servicios"
               target="_blank"
               rel="noopener noreferrer"
               class="btn btn-primary"
             >Hablar por WhatsApp</a>
+            <a href="SAF.html" class="btn btn-primary">Rellenar formulario</a>
             <a href="mailto:hola@autoflow.es" class="btn btn-secondary">Enviar email</a>
           </div>
         </div>
 
-        <div class="contact-grid">
-          <div class="contact-card reveal">
-            <h3>Canales de contacto</h3>
-            <p style="margin-top: 12px;">
-              El siguiente paso está pensado para ser directo, claro y profesional.
-            </p>
-            <div class="contact-list">
-              <a
-                class="contact-link"
-                href="https://wa.me/34600000000?text=Hola,%20me%20gustaria%20recibir%20una%20propuesta"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div class="contact-badge">WA</div>
-                <div>
-                  <strong>WhatsApp</strong>
-                  <p>+34 600 000 000</p>
-                </div>
-              </a>
-              <a class="contact-link" href="mailto:hola@autoflow.es">
-                <div class="contact-badge">@</div>
-                <div>
-                  <strong>Email</strong>
-                  <p>hola@autoflow.es</p>
-                </div>
-              </a>
-            </div>
-          </div>
-
-          <div class="contact-card reveal">
-            <div class="contact-box">
-              <h3>Qué puedes pedirnos</h3>
-              <p>Un bot para WhatsApp o Telegram con lógica de negocio.</p>
-              <p>Una automatización conectada con APIs y herramientas internas.</p>
-              <p>Una web más tecnológica, clara y profesional.</p>
-              <p>El despliegue y hosting de la solución si lo necesitas.</p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   </main>
@@ -1477,12 +1452,12 @@
   <footer>
     <div class="container footer-inner">
       <div>
-        <div class="brand">Auto<span>Flow</span></div>
+        <div class="brand">Zynkly <span>Tech</span></div>
         <p>Automatizaciones, bots, desarrollo web e integraciones para empresas.</p>
       </div>
       <div>
-        <p>hola@autoflow.es</p>
-        <p>© 2026 AutoFlow. Todos los derechos reservados.</p>
+        <p>Contacto por correo</p>
+        <p>© 2026 Zynkly Tech. Todos los derechos reservados.</p>
       </div>
     </div>
   </footer>
@@ -1493,7 +1468,7 @@
         <div class="chatbot-title">
           <div class="chatbot-avatar">AF</div>
           <div>
-            <strong>Asistente AutoFlow</strong>
+            <strong>Asistente Zynkly Tech</strong>
             <span>Respuestas rápidas sobre servicios, precios y contacto</span>
           </div>
         </div>
@@ -1501,12 +1476,12 @@
       </div>
       <div class="chatbot-body" id="chatbotMessages">
         <div class="chatbot-message bot">
-          <div class="chatbot-bubble">¡Hola! 👋 Soy el asistente de AutoFlow.
+          <div class="chatbot-bubble">¡Hola! 👋 Soy el asistente de Zynkly Tech.
 
 Puedes preguntarme por:
 - servicios
 - precios
-- WhatsApp o contacto
+- contacto
 - email
 - automatización
 - bots o chatbot</div>
@@ -1598,23 +1573,23 @@ Puedes preguntarme por:
       const rules = [
         {
           keywords: ["hola", "buenas", "hey"],
-          reply: "¡Hola! 👋 Soy el asistente de AutoFlow. ¿En qué puedo ayudarte? Puedes preguntarme por precios, servicios o contacto."
+          reply: "¡Hola! 👋 Soy el asistente de Zynkly Tech. ¿En qué puedo ayudarte? Puedes preguntarme por precios, servicios o contacto."
         },
         {
           keywords: ["servicios", "qué hacéis", "que hacéis", "qué ofrecen", "que ofrecen"],
-          reply: "En AutoFlow creamos bots para WhatsApp y Telegram, automatizaciones, integraciones con APIs, desarrollo web y gestión de hosting. ¿Qué te interesa mejorar?"
+          reply: "En Zynkly Tech creamos bots para WhatsApp y Telegram, automatizaciones, integraciones con APIs, desarrollo web y gestión de hosting. ¿Qué te interesa mejorar?"
         },
         {
           keywords: ["precio", "cuánto cuesta", "cuanto cuesta", "tarifas"],
           reply: "Los precios dependen de lo que necesites. Cada solución es personalizada. Lo mejor es que nos escribas y te damos una propuesta adaptada."
         },
         {
-          keywords: ["whatsapp", "contactar", "hablar", "número", "numero"],
-          reply: "Puedes escribirnos directamente por WhatsApp aquí 👉 https://wa.me/34600000000 o a nuestro email example@gmail.com"
+          keywords: ["whatsapp", "contactar", "hablar", "número", "numero","contacto"],
+          reply: "Puedes contactarnos por WhatsApp: https://wa.me/34603964640, por email desde el botón \"Enviar email\" o rellenando el formulario en https://3ale3.github.io/proyecto-web/SAF.html"
         },
         {
           keywords: ["email", "correo"],
-          reply: "También puedes escribirnos por email: hola@autoflow.es"
+          reply: "Puedes escribirnos por email desde el botón \"Enviar email\" o, si prefieres, rellenar el formulario en https://3ale3.github.io/proyecto-web/SAF.html."
         },
         {
           keywords: ["automatizar", "automatización", "automatizacion"],
@@ -1630,7 +1605,7 @@ Puedes preguntarme por:
 
       return match
         ? match.reply
-        : "Ponte en contacto con nosotros mediante nuestro correo example@gmail.com o whatsapp ";
+        : "Puedes contactarnos por WhatsApp, por email desde el botón de contacto o rellenando el formulario en https://3ale3.github.io/proyecto-web/SAF.html.";
     }
 
     chatbotToggle.addEventListener("click", () => {

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AutoFlow | Solicitud</title>
-  <meta name="description" content="Envía tu solicitud a AutoFlow. Automatizaciones, bots, integraciones con APIs, desarrollo web y hosting para tu empresa." />
+  <title>Zynkly Tech | Solicitud</title>
+  <meta name="description" content="Envía tu solicitud a Zynkly Tech. Automatizaciones, bots, integraciones con APIs, desarrollo web y hosting para tu empresa." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -953,7 +953,7 @@
       saveRLState(state);
 
       /* Log en consola para monitorización */
-      console.warn("[AutoFlow/AntiSpam] Infracción registrada. Bloqueo:", Math.round(blockDuration/1000), "s. Total infracciones:", state.infractions);
+        console.warn("[Zynkly Tech/AntiSpam] Infracción registrada. Bloqueo:", Math.round(blockDuration/1000), "s. Total infracciones:", state.infractions);
     }
 
     /* ════════════════════════════════════════════════════════════════
@@ -1137,7 +1137,7 @@
          Registramos infracción y rechazamos en silencio (sin mensaje
          de error real para no dar pistas al atacante).            */
       if (fieldHP && fieldHP.value.trim() !== "") {
-        console.warn("[AutoFlow/AntiSpam] Honeypot activado. Envío rechazado.");
+        console.warn("[Zynkly Tech/AntiSpam] Honeypot activado. Envío rechazado.");
         recordInfraction();
         /* Simular éxito para no alertar al bot */
         submitBtn.classList.add("loading");
@@ -1155,7 +1155,7 @@
          que cargó la página, casi seguro es un bot.              */
       const fillTime = Date.now() - FORM_LOAD_TIME;
       if (fillTime < MIN_FILL_TIME_MS) {
-        console.warn("[AutoFlow/AntiSpam] Envío demasiado rápido:", fillTime, "ms");
+        console.warn("[Zynkly Tech/AntiSpam] Envío demasiado rápido:", fillTime, "ms");
         recordInfraction();
         showBanner("error", "✕", "Por favor, revisa el formulario antes de enviarlo.");
         return;
@@ -1165,7 +1165,7 @@
          Si el token ya fue consumido, este es un reenvío duplicado
          o un intento de replay.                                   */
       if (tokenConsumed) {
-        console.warn("[AutoFlow/AntiSpam] Token ya consumido. Posible replay.");
+        console.warn("[Zynkly Tech/AntiSpam] Token ya consumido. Posible replay.");
         showBanner("error", "✕", "Sesión caducada. Recarga la página para enviar una nueva solicitud.");
         return;
       }
@@ -1253,7 +1253,7 @@
 
       } catch (err) {
         showBanner("error", "✕", "No se pudo enviar la solicitud. Revisa tu conexión o inténtalo de nuevo.");
-        console.error("[AutoFlow/Solicitud] Error Worker:", err);
+        console.error("[Zynkly Tech/Solicitud] Error Worker:", err);
       } finally {
         submitBtn.classList.remove("loading");
         if (submissionsThisSession < MAX_SUBMISSIONS) submitBtn.disabled = false;
