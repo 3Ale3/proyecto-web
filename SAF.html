@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zynkly Tech | Solicitud</title>
-  <meta name="description" content="EnvÃ­a tu solicitud a Zynkly Tech. Automatizaciones, bots, integraciones con APIs, desarrollo web y hosting para tu empresa." />
+  <meta name="description" content="Envía tu solicitud a Zynkly Tech. Automatizaciones, bots, integraciones con APIs, desarrollo web y hosting para tu empresa." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -204,48 +204,6 @@
     }
 
     
-    .submission-counter {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-top: 22px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: rgba(95,240,210,.07);
-      border: 1px solid rgba(95,240,210,.15);
-    }
-
-    .counter-pips {
-      display: flex;
-      gap: 7px;
-      flex-shrink: 0;
-    }
-
-    .counter-pip {
-      width: 14px; height: 14px;
-      border-radius: 50%;
-      border: 2px solid rgba(95,240,210,.35);
-      background: transparent;
-      transition: background .35s ease, border-color .35s ease, box-shadow .35s ease;
-    }
-
-    .counter-pip.used {
-      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
-      border-color: transparent;
-      box-shadow: 0 0 10px rgba(95,240,210,.4);
-    }
-
-    .counter-pip.blocked {
-      background: rgba(255,143,143,.35);
-      border-color: rgba(255,143,143,.5);
-    }
-
-    .counter-text {
-      font-size: .87rem;
-      font-weight: 600;
-      color: var(--accent-strong);
-      line-height: 1.4;
-    }
 
     
     .hp-field {
@@ -433,7 +391,7 @@
       opacity: 1;
       transform: translateY(0);
     }
-    .field-error::before { content: "âœ• "; font-size: .8rem; }
+    .field-error::before { content: "✕ "; font-size: .8rem; }
 
     
     .char-count {
@@ -473,7 +431,7 @@
       color: var(--muted);
     }
     .spam-badge::before {
-      content: "ðŸ›¡";
+      content: "🛡";
       font-size: .85rem;
     }
 
@@ -539,37 +497,6 @@
     .banner-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
 
     
-    .limit-overlay {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      gap: 16px;
-      padding: 40px 30px;
-      background:
-        radial-gradient(circle at top center, rgba(95,240,210,.12), transparent 50%),
-        rgba(4,11,20,.92);
-      border-radius: 20px;
-      border: 1px solid rgba(95,240,210,.18);
-      margin-top: 14px;
-    }
-    .limit-overlay.show { display: flex; }
-
-    .limit-icon { font-size: 2.8rem; }
-
-    .limit-overlay h4 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.25rem;
-      color: var(--text);
-      margin: 0;
-    }
-
-    .limit-overlay p {
-      font-size: .95rem;
-      max-width: 420px;
-      margin: 0 auto;
-    }
 
     
     .reveal {
@@ -611,10 +538,10 @@
       
       <div class="section-head reveal">
         <div class="eyebrow">Solicitud</div>
-        <h2>CuÃ©ntanos tu proyecto y te preparamos una propuesta</h2>
+        <h2>Cuéntanos tu proyecto y te preparamos una propuesta</h2>
         <p>
           Si necesitas automatizar procesos, gestionar tu servidor, desarrollar una web o conectar APIs,
-          dÃ©janos los datos y te responderemos con una propuesta a medida en menos de 24&nbsp;horas.
+          déjanos los datos y te responderemos con una propuesta a medida en menos de 24&nbsp;horas.
         </p>
       </div>
 
@@ -623,41 +550,30 @@
 
         
         <aside class="solicitud-info reveal">
-          <div class="eyebrow" style="margin-bottom:18px;">Por quÃ© elegirnos</div>
-          <h3>Un equipo tÃ©cnico con foco en resultados</h3>
-          <p>Cada solicitud es revisada personalmente. Sin bots intermedios, sin plantillas vacÃ­as.</p>
+          <div class="eyebrow" style="margin-bottom:18px;">Por qué elegirnos</div>
+          <h3>Un equipo técnico con foco en resultados</h3>
+          <p>Cada solicitud es revisada personalmente. Sin bots intermedios, sin plantillas vacías.</p>
 
           <div class="info-points">
             <div class="info-point">
-              <div class="info-point-icon">âš™ï¸</div>
-              <strong>AutomatizaciÃ³n de procesos</strong>
+              <div class="info-point-icon">⚙️</div>
+              <strong>Automatización de procesos</strong>
               <p>Workflows, notificaciones y tareas repetitivas funcionando solos para liberar tiempo de tu equipo.</p>
             </div>
             <div class="info-point">
-              <div class="info-point-icon">ðŸ–¥ï¸</div>
-              <strong>GestiÃ³n de servidores</strong>
-              <p>ConfiguraciÃ³n, mantenimiento y monitorizaciÃ³n de infraestructura lista para producciÃ³n.</p>
+              <div class="info-point-icon">🖥️</div>
+              <strong>Gestión de servidores</strong>
+              <p>Configuración, mantenimiento y monitorización de infraestructura lista para producción.</p>
             </div>
             <div class="info-point">
-              <div class="info-point-icon">ðŸŒ</div>
+              <div class="info-point-icon">🌐</div>
               <strong>Desarrollo web</strong>
-              <p>PÃ¡ginas, paneles y aplicaciones web con diseÃ±o profesional y enfoque en conversiÃ³n.</p>
+              <p>Páginas, paneles y aplicaciones web con diseño profesional y enfoque en conversión.</p>
             </div>
             <div class="info-point">
-              <div class="info-point-icon">ðŸ”—</div>
+              <div class="info-point-icon">🔗</div>
               <strong>Integraciones con APIs</strong>
-              <p>Conectamos tus herramientas para que los datos fluyan sin intervenciÃ³n manual.</p>
-            </div>
-          </div>
-
-          
-          <div class="submission-counter">
-            <div class="counter-pips" id="counterPips" aria-label="Solicitudes enviadas">
-              <div class="counter-pip" id="pip1" aria-label="Solicitud 1"></div>
-              <div class="counter-pip" id="pip2" aria-label="Solicitud 2"></div>
-            </div>
-            <div class="counter-text" id="counterText">
-              Puedes enviar hasta 2 solicitudes en esta sesiÃ³n.
+              <p>Conectamos tus herramientas para que los datos fluyan sin intervención manual.</p>
             </div>
           </div>
 
@@ -672,8 +588,8 @@
         
         <div class="solicitud-form-card reveal">
           <div class="form-header">
-            <h3>EnvÃ­a tu solicitud</h3>
-            <p>Todos los campos marcados con <span style="color:var(--accent);font-weight:700;">â€¢</span> son obligatorios.</p>
+            <h3>Envía tu solicitud</h3>
+            <p>Todos los campos marcados con <span style="color:var(--accent);font-weight:700;">•</span> son obligatorios.</p>
           </div>
 
           
@@ -704,7 +620,7 @@
                   id="fieldName"
                   name="nombre"
                   type="text"
-                  placeholder="Ana GarcÃ­a"
+                  placeholder="Ana García"
                   autocomplete="name"
                   maxlength="80"
                   required
@@ -717,7 +633,7 @@
               <div class="form-field">
                 <label class="form-label" for="fieldEmail">
                   <span class="required-dot" aria-hidden="true"></span>
-                  Correo electrÃ³nico
+                  Correo electrónico
                 </label>
                 <input
                   class="form-input"
@@ -749,14 +665,14 @@
                     required
                     aria-describedby="errorService"
                   >
-                    <option value="" disabled selected>Selecciona una opciÃ³n</option>
-                    <option value="AutomatizaciÃ³n de procesos">AutomatizaciÃ³n de procesos</option>
-                    <option value="GestiÃ³n de servidores">GestiÃ³n de servidores</option>
+                    <option value="" disabled selected>Selecciona una opción</option>
+                    <option value="Automatización de procesos">Automatización de procesos</option>
+                    <option value="Gestión de servidores">Gestión de servidores</option>
                     <option value="Desarrollo web">Desarrollo web</option>
-                    <option value="IntegraciÃ³n con APIs">IntegraciÃ³n con APIs</option>
+                    <option value="Integración con APIs">Integración con APIs</option>
                     <option value="Bot para WhatsApp o Telegram">Bot para WhatsApp o Telegram</option>
                     <option value="Hosting y despliegue">Hosting y despliegue</option>
-                    <option value="SoluciÃ³n completa">SoluciÃ³n completa</option>
+                    <option value="Solución completa">Solución completa</option>
                     <option value="Personalizada">Personalizada</option>
                   </select>
                 </div>
@@ -784,13 +700,13 @@
             <div class="form-field full">
               <label class="form-label" for="fieldMessage">
                 <span class="required-dot" aria-hidden="true"></span>
-                DescripciÃ³n del proyecto
+                Descripción del proyecto
               </label>
               <textarea
                 class="form-textarea"
                 id="fieldMessage"
                 name="mensaje"
-                placeholder="CuÃ©ntanos quÃ© quieres conseguir: quÃ© proceso necesitas automatizar, quÃ© tipo de web buscas, quÃ© integraciones necesitas o quÃ© problema quieres resolver..."
+                placeholder="Cuéntanos qué quieres conseguir: qué proceso necesitas automatizar, qué tipo de web buscas, qué integraciones necesitas o qué problema quieres resolver..."
                 maxlength="1200"
                 required
                 aria-describedby="errorMessage charCount"
@@ -806,17 +722,10 @@
             </div>
 
             
-            <div class="limit-overlay" id="limitOverlay">
-              <div class="limit-icon">ðŸš«</div>
-              <h4>LÃ­mite de sesiÃ³n alcanzado</h4>
-              <p>Ya has enviado 2 solicitudes en esta sesiÃ³n. Para mÃ¡s consultas, contÃ¡ctanos directamente por WhatsApp o email.</p>
-            </div>
-
-            
             <div class="form-footer">
               <div class="form-footer-meta">
                 <span class="spam-badge"></span>
-                <span style="font-size:.8rem;color:var(--muted);">Tu informaciÃ³n no se compartirÃ¡ con terceros.</span>
+                <span style="font-size:.8rem;color:var(--muted);">Tu información no se compartirá con terceros.</span>
               </div>
               <button
                 class="btn btn-primary submit-btn"
@@ -824,7 +733,7 @@
                 type="submit"
                 aria-label="Enviar solicitud"
               >
-                <span class="btn-text">Enviar solicitud â†’</span>
+                <span class="btn-text">Enviar solicitud →</span>
                 <span class="btn-spinner" aria-hidden="true"></span>
               </button>
             </div>
@@ -850,10 +759,10 @@
     const MIN_FILL_TIME_MS = 3000;
 
     
-    const BLOCK_STEP_MS  = 60_000;   // +1 min por infracciÃ³n
-    const BLOCK_MAX_MS   = 600_000;  // 10 min mÃ¡ximo
+    const BLOCK_STEP_MS  = 60_000;   // +1 min por infracción
+    const BLOCK_MAX_MS   = 600_000;  // 10 min máximo
     const RATE_WINDOW_MS = 600_000;  // Ventana de rate-limit: 10 min
-    const RATE_MAX_HITS  =  5;       // MÃ¡x. 5 envÃ­os en esa ventana
+    const RATE_MAX_HITS  =  5;       // Máx. 5 envíos en esa ventana
 
     
     function generateToken() {
@@ -862,7 +771,7 @@
       return Array.from(arr).map(b => b.toString(16).padStart(2, "0")).join("");
     }
     let sessionToken     = generateToken();
-    let tokenConsumed    = false;   // true despuÃ©s del primer envÃ­o exitoso
+    let tokenConsumed    = false;   // true después del primer envío exitoso
 
     
     const FORM_LOAD_TIME = Date.now();
@@ -903,7 +812,7 @@
         state.blocked_until = now + blockDuration;
         saveRLState(state);
         const mins = Math.round(blockDuration / 60000);
-        return `Has superado el lÃ­mite de ${RATE_MAX_HITS} envÃ­os. Acceso bloqueado ${mins} minuto${mins !== 1 ? "s" : ""}.`;
+        return `Has superado el límite de ${RATE_MAX_HITS} envíos. Acceso bloqueado ${mins} minuto${mins !== 1 ? "s" : ""}.`;
       }
 
       return null; // OK
@@ -925,7 +834,7 @@
       saveRLState(state);
 
       
-        console.warn("[Zynkly Tech/AntiSpam] InfracciÃ³n registrada. Bloqueo:", Math.round(blockDuration/1000), "s. Total infracciones:", state.infractions);
+        console.warn("[Zynkly Tech/AntiSpam] Infracción registrada. Bloqueo:", Math.round(blockDuration/1000), "s. Total infracciones:", state.infractions);
     }
 
     
@@ -934,11 +843,7 @@
     const statusBanner = document.getElementById("statusBanner");
     const statusIcon   = document.getElementById("statusIcon");
     const statusText   = document.getElementById("statusText");
-    const limitOverlay = document.getElementById("limitOverlay");
     const charCount    = document.getElementById("charCount");
-    const counterText  = document.getElementById("counterText");
-    const pip1         = document.getElementById("pip1");
-    const pip2         = document.getElementById("pip2");
 
     const fieldName    = document.getElementById("fieldName");
     const fieldEmail   = document.getElementById("fieldEmail");
@@ -965,16 +870,16 @@
     const VALIDATORS = {
       nombre(val) {
         if (!val.trim())             return "El nombre es obligatorio.";
-        if (/\d/.test(val))          return "El nombre no puede contener nÃºmeros.";
+        if (/\d/.test(val))          return "El nombre no puede contener números.";
         if (val.trim().length < 2)   return "El nombre debe tener al menos 2 caracteres.";
         if (val.trim().length > 80)  return "El nombre no puede superar 80 caracteres.";
         return null;
       },
       email(val) {
-        if (!val.trim()) return "El correo electrÃ³nico es obligatorio.";
-        if (!val.includes("@")) return "El correo debe incluir el sÃ­mbolo @.";
+        if (!val.trim()) return "El correo electrónico es obligatorio.";
+        if (!val.includes("@")) return "El correo debe incluir el símbolo @.";
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-        if (!re.test(val.trim())) return "Introduce un correo vÃ¡lido (ej.: nombre@empresa.com).";
+        if (!re.test(val.trim())) return "Introduce un correo válido (ej.: nombre@empresa.com).";
         return null;
       },
       servicio(val) {
@@ -983,7 +888,7 @@
       },
       mensaje(val) {
         if (!val.trim())            return "Describe brevemente tu proyecto o necesidad.";
-        if (val.trim().length < 20) return "Por favor, aÃ±ade un poco mÃ¡s de detalle (mÃ­n. 20 caracteres).";
+        if (val.trim().length < 20) return "Por favor, añade un poco más de detalle (mín. 20 caracteres).";
         return null;
       }
     };
@@ -1050,26 +955,6 @@
     });
 
     
-    function updateCounter(count) {
-      const pips = [pip1, pip2];
-      pips.forEach((pip, i) => {
-        pip.classList.remove("used", "blocked");
-        if (i < count) pip.classList.add(count >= MAX_SUBMISSIONS ? "blocked" : "used");
-      });
-      const remaining = MAX_SUBMISSIONS - count;
-      if (remaining <= 0) {
-        counterText.textContent = "LÃ­mite de sesiÃ³n alcanzado. ContÃ¡ctanos directamente.";
-        counterText.style.color = "var(--danger)";
-      } else if (remaining === 1) {
-        counterText.textContent = "Te queda 1 envÃ­o en esta sesiÃ³n.";
-        counterText.style.color = "var(--warning)";
-      } else {
-        counterText.textContent = '';
-        counterText.style.color = "";
-      }
-    }
-
-    
     function showBanner(type, icon, message) {
       statusBanner.className = `form-status-banner show ${type}`;
       statusIcon.textContent = icon;
@@ -1082,7 +967,6 @@
     function applySessionLimit() {
       form.querySelectorAll("input, select, textarea").forEach(el => el.disabled = true);
       submitBtn.disabled = true;
-      limitOverlay.classList.add("show");
     }
 
     
@@ -1092,20 +976,20 @@
 
       
       if (submissionsThisSession >= MAX_SUBMISSIONS) {
-        showBanner("warning", "âš ï¸", "Has alcanzado el lÃ­mite de 2 solicitudes por sesiÃ³n. ContÃ¡ctanos directamente.");
+        showBanner("warning", "⚠️", "No se puede procesar la solicitud en este momento.");
         return;
       }
 
       
       if (fieldHP && fieldHP.value.trim() !== "") {
-        console.warn("[Zynkly Tech/AntiSpam] Honeypot activado. EnvÃ­o rechazado.");
+        console.warn("[Zynkly Tech/AntiSpam] Honeypot activado. Envío rechazado.");
         recordInfraction();
         
         submitBtn.classList.add("loading");
         submitBtn.disabled = true;
         await new Promise(r => setTimeout(r, 1400));
         submitBtn.classList.remove("loading");
-        showBanner("success", "âœ”", "Â¡Solicitud enviada! Te responderemos pronto.");
+        showBanner("success", "✔", "¡Solicitud enviada! Te responderemos pronto.");
         form.reset();
         submitBtn.disabled = false;
         return;
@@ -1114,29 +998,29 @@
       
       const fillTime = Date.now() - FORM_LOAD_TIME;
       if (fillTime < MIN_FILL_TIME_MS) {
-        console.warn("[Zynkly Tech/AntiSpam] EnvÃ­o demasiado rÃ¡pido:", fillTime, "ms");
+        console.warn("[Zynkly Tech/AntiSpam] Envío demasiado rápido:", fillTime, "ms");
         recordInfraction();
-        showBanner("error", "âœ•", "Por favor, revisa el formulario antes de enviarlo.");
+        showBanner("error", "✕", "Por favor, revisa el formulario antes de enviarlo.");
         return;
       }
 
       
       if (tokenConsumed) {
         console.warn("[Zynkly Tech/AntiSpam] Token ya consumido. Posible replay.");
-        showBanner("error", "âœ•", "SesiÃ³n caducada. Recarga la pÃ¡gina para enviar una nueva solicitud.");
+        showBanner("error", "✕", "Sesión caducada. Recarga la página para enviar una nueva solicitud.");
         return;
       }
 
       
       const rlError = checkRateLimit();
       if (rlError) {
-        showBanner("warning", "ðŸš«", rlError);
+        showBanner("warning", "🚫", rlError);
         return;
       }
 
       
       if (!validateAll()) {
-        showBanner("error", "âœ•", "Por favor, corrige los errores seÃ±alados antes de enviar.");
+        showBanner("error", "✕", "Por favor, corrige los errores señalados antes de enviar.");
         const firstInvalid = form.querySelector("[aria-invalid='true']");
         if (firstInvalid) firstInvalid.focus();
         return;
@@ -1144,15 +1028,14 @@
 
       
       if (!FORM_API_ENDPOINT) {
-        showBanner("warning", "âš™ï¸", "Formulario en modo demo: aÃ±ade la URL de tu Cloudflare Worker para activar los envÃ­os.");
+        showBanner("warning", "⚙️", "Formulario en modo demo: añade la URL de tu Cloudflare Worker para activar los envíos.");
         submitBtn.classList.add("loading");
         submitBtn.disabled = true;
         await new Promise(r => setTimeout(r, 1200));
         submitBtn.classList.remove("loading");
         submissionsThisSession++;
-        updateCounter(submissionsThisSession);
         tokenConsumed = true;                        // [4] Invalida el token
-        showBanner("success", "âœ”", "Demo: solicitud procesada. (AÃ±ade el Webhook para envÃ­os reales.)");
+        showBanner("success", "✔", "Demo: solicitud procesada. (Añade el Webhook para envíos reales.)");
         form.reset();
         [fieldName, fieldEmail, fieldService, fieldMessage].forEach(f => f.classList.remove("valid"));
         charCount.textContent = "0 / 1200 caracteres";
@@ -1193,9 +1076,8 @@
         tokenConsumed = true;              // [4] Invalida el token tras uso exitoso
         recordHit();                       // [1] Registra hit en rate-limiter
         submissionsThisSession++;
-        updateCounter(submissionsThisSession);
 
-        showBanner("success", "âœ”", "Â¡Solicitud enviada! Te responderemos en menos de 48 horas con una propuesta personalizada.");
+        showBanner("success", "✔", "¡Solicitud enviada! Te responderemos en menos de 48 horas con una propuesta personalizada.");
 
         form.reset();
         [fieldName, fieldEmail, fieldService, fieldMessage].forEach(f => {
@@ -1207,7 +1089,7 @@
         if (submissionsThisSession >= MAX_SUBMISSIONS) applySessionLimit();
 
       } catch (err) {
-        showBanner("error", "âœ•", "No se pudo enviar la solicitud. Revisa tu conexiÃ³n o intÃ©ntalo de nuevo.");
+        showBanner("error", "✕", "No se pudo enviar la solicitud. Revisa tu conexión o inténtalo de nuevo.");
         console.error("[Zynkly Tech/Solicitud] Error Worker:", err);
       } finally {
         submitBtn.classList.remove("loading");
@@ -1215,12 +1097,9 @@
       }
     });
 
-    
-    updateCounter(0);
-
-    
   </script>
 
 </body>
 </html>
+
 
